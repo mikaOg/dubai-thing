@@ -28,8 +28,8 @@ export const tours: Tour[] = [
     price: 3500,
     rating: 4.7,
     reviews: 312,
-    image: '/tours/mekelle.jpg',
-    gallery: ['/tours/mekelle-1.jpg', '/tours/mekelle-2.jpg', '/tours/mekelle-3.jpg'],
+    image: '/tours/1.jpg',
+    gallery: ['/tours/2.jpg', '/tours/3.jpg'],
     excerpt:
       'A full day in and around Mekelle — the old town, the market, the Emperor Yohannes palace and the rock-hewn churches of Tigray.',
     highlights: [
@@ -55,8 +55,8 @@ export const tours: Tour[] = [
     price: 4900,
     rating: 4.6,
     reviews: 178,
-    image: '/tours/hashenge.jpg',
-    gallery: ['/tours/hashenge-1.jpg', '/tours/hashenge-2.jpg', '/tours/hashenge-3.jpg'],
+    image: '/tours/4.jpg',
+    gallery: ['/tours/5.jpg', '/tours/6.jpg'],
     excerpt:
       'A relaxed day at Lake Hashenge — crater lake, birdlife and a picnic lunch on the shore.',
     highlights: ['Crater lake views', 'Birdwatching', 'Picnic on the shore', 'Photo stops'],
@@ -77,8 +77,8 @@ export const tours: Tour[] = [
     price: 5900,
     rating: 4.7,
     reviews: 224,
-    image: '/tours/salt-flats.jpg',
-    gallery: ['/tours/salt-flats-1.jpg', '/tours/salt-flats-2.jpg', '/tours/salt-flats-3.jpg'],
+    image: '/tours/7.jpg',
+    gallery: ['/tours/8.jpg', '/tours/9.jpg'],
     excerpt:
       'A long single-day drive into the salt flats — camel caravans, salt cutters and the endless white plains.',
     highlights: ['Camel caravans', 'Salt cutter demonstration', 'Endless salt plains', 'Afar village visit'],
@@ -99,8 +99,8 @@ export const tours: Tour[] = [
     price: 9900,
     rating: 4.8,
     reviews: 189,
-    image: '/tours/dallol.jpg',
-    gallery: ['/tours/dallol-1.jpg', '/tours/dallol-2.jpg', '/tours/dallol-3.jpg'],
+    image: '/tours/10.jpg',
+    gallery: ['/tours/11.jpg', '/tours/12.jpg'],
     excerpt:
       'The most colourful place on Earth. Acid pools, salt towers and neon-green springs in a two-day expedition.',
     highlights: ['Neon green acid pools', 'Salt mountain formations', 'Overnight camp', 'Golden-hour photography'],
@@ -121,8 +121,8 @@ export const tours: Tour[] = [
     price: 24900,
     rating: 4.9,
     reviews: 412,
-    image: '/tours/erta-ale.jpg',
-    gallery: ['/tours/erta-ale-1.jpg', '/tours/erta-ale-2.jpg', '/tours/erta-ale-3.jpg'],
+    image: '/tours/13.jpg',
+    gallery: ['/tours/14.jpg', '/tours/15.jpg'],
     excerpt:
       "Trek to the world's longest-existing lava lake. Night hike, crater-rim camp, unforgettable sunrise.",
     highlights: ['Night hike to the rim', 'Camp beside the lava lake', 'Afar village visit', 'Sunrise over Danakil'],
@@ -144,8 +144,8 @@ export const tours: Tour[] = [
     price: 31900,
     rating: 4.8,
     reviews: 147,
-    image: '/tours/assal.jpg',
-    gallery: ['/tours/assal-1.jpg', '/tours/assal-2.jpg', '/tours/assal-3.jpg'],
+    image: '/tours/16.jpg',
+    gallery: ['/tours/17.jpg', '/tours/18.jpg'],
     excerpt:
       'Travel with the legendary camel caravans that have crossed these salt flats for centuries.',
     highlights: ['Camel caravan trek', 'Salt cutting demo', 'Lake Assal sunset', 'Afar cultural evening'],
@@ -167,8 +167,8 @@ export const tours: Tour[] = [
     price: 49900,
     rating: 4.9,
     reviews: 264,
-    image: '/tours/danakil.jpg',
-    gallery: ['/tours/danakil-1.jpg', '/tours/danakil-2.jpg', '/tours/danakil-3.jpg'],
+    image: '/tours/19.jpg',
+    gallery: ['/tours/20.jpg', '/tours/21.jpg'],
     excerpt:
       'Our classic full expedition — Dallol, Erta Ale and the salt flats, all in one journey.',
     highlights: ['Erta Ale lava lake', 'Dallol sulphur fields', 'Lake Assal salt flats', 'Two nights wild camping'],
@@ -191,8 +191,8 @@ export const tours: Tour[] = [
     price: 64900,
     rating: 5.0,
     reviews: 58,
-    image: '/tours/photography.jpg',
-    gallery: ['/tours/photography-1.jpg', '/tours/photography-2.jpg', '/tours/photography-3.jpg'],
+    image: '/tours/22.jpg',
+    gallery: ['/tours/23.jpg', '/tours/24.jpg'],
     excerpt:
       'Built around light, not miles. Timed arrivals for golden hour at Dallol, lava lake at night, caravans at dawn.',
     highlights: ['Golden hour at Dallol', 'Night lava lake shoot', 'Caravan silhouettes', 'Small group, pro guide'],
