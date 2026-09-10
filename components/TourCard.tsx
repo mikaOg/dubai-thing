@@ -34,7 +34,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
           <div>
             <span className="text-xs text-desert-800/60">From</span>
             <p className="text-xl font-extrabold text-desert-900">
-              ${tour.price}
+              {tour.price.toLocaleString()} ETB
               <span className="ml-1 text-xs font-medium text-desert-800/60">/ person</span>
             </p>
           </div>
