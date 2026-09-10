@@ -43,7 +43,29 @@ export default function TourDetailPage({ params }: { params: { slug: string } })
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      {/* GALLERY */}
+      <section className="mx-auto max-w-7xl px-4 pt-14 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {tour.gallery.map((src, i) => (
+            <div
+              key={src}
+              className={`relative overflow-hidden rounded-xl ${
+                i === 0 ? 'col-span-2 h-72 sm:h-80' : 'h-40 sm:h-40'
+              }`}
+            >
+              <Image
+                src={src}
+                alt={`${tour.title} photo ${i + 1}`}
+                fill
+                sizes="(max-width: 768px) 50vw, 33vw"
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1fr_380px]">
           <div>
             <p className="text-lg leading-relaxed text-desert-800/85">{tour.excerpt}</p>
@@ -52,10 +74,7 @@ export default function TourDetailPage({ params }: { params: { slug: string } })
               <h2 className="text-2xl font-extrabold text-desert-900">Trip highlights</h2>
               <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                 {tour.highlights.map((h) => (
-                  <li
-                    key={h}
-                    className="flex gap-3 rounded-xl border border-sand-200 bg-sand-50/50 p-4 text-sm text-desert-800"
-                  >
+                  <li key={h} className="flex gap-3 rounded-xl border border-sand-200 bg-sand-50/50 p-4 text-sm text-desert-800">
                     <span className="text-sand-600">✓</span>
                     {h}
                   </li>
@@ -69,9 +88,7 @@ export default function TourDetailPage({ params }: { params: { slug: string } })
                 {tour.itinerary.map((d) => (
                   <li key={d.day} className="relative">
                     <span className="absolute -left-[31px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-white bg-sand-600" />
-                    <p className="text-xs font-bold uppercase tracking-wider text-sand-600">
-                      {d.day}
-                    </p>
+                    <p className="text-xs font-bold uppercase tracking-wider text-sand-600">{d.day}</p>
                     <h3 className="mt-1 text-lg font-bold text-desert-900">{d.title}</h3>
                     <p className="mt-1 text-sm leading-relaxed text-desert-800/75">{d.detail}</p>
                   </li>
@@ -84,10 +101,7 @@ export default function TourDetailPage({ params }: { params: { slug: string } })
                 <h3 className="text-lg font-extrabold text-desert-900">What&apos;s included</h3>
                 <ul className="mt-4 space-y-2 text-sm text-desert-800/80">
                   {tour.includes.map((i) => (
-                    <li key={i} className="flex gap-2">
-                      <span className="text-green-600">✓</span>
-                      {i}
-                    </li>
+                    <li key={i} className="flex gap-2"><span className="text-green-600">✓</span>{i}</li>
                   ))}
                 </ul>
               </div>
@@ -95,10 +109,7 @@ export default function TourDetailPage({ params }: { params: { slug: string } })
                 <h3 className="text-lg font-extrabold text-desert-900">Not included</h3>
                 <ul className="mt-4 space-y-2 text-sm text-desert-800/80">
                   {tour.excludes.map((i) => (
-                    <li key={i} className="flex gap-2">
-                      <span className="text-red-500">✕</span>
-                      {i}
-                    </li>
+                    <li key={i} className="flex gap-2"><span className="text-red-500">✕</span>{i}</li>
                   ))}
                 </ul>
               </div>
