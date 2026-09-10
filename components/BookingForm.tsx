@@ -61,7 +61,9 @@ export default function BookingForm({ tour }: { tour: Tour }) {
       className="rounded-2xl border border-sand-200 bg-white p-6 shadow-lg"
     >
       <h3 className="text-lg font-bold text-desert-900">Book this tour</h3>
-      <p className="mt-1 text-sm text-desert-800/60">Free cancellation up to 7 days before departure.</p>
+      <p className="mt-1 text-sm text-desert-800/60">
+        Free cancellation up to 7 days before departure.
+      </p>
 
       {error && (
         <div className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</div>
@@ -134,13 +136,13 @@ export default function BookingForm({ tour }: { tour: Tour }) {
       <div className="mt-6 space-y-2 border-t border-sand-100 pt-5">
         <div className="flex justify-between text-sm text-desert-800/70">
           <span>
-            ${tour.price} × {guests} {guests === 1 ? 'guest' : 'guests'}
+            {tour.price.toLocaleString()} ETB × {guests} {guests === 1 ? 'guest' : 'guests'}
           </span>
-          <span>${total}</span>
+          <span>{total.toLocaleString()} ETB</span>
         </div>
         <div className="flex justify-between text-base font-bold text-desert-900">
           <span>Total</span>
-          <span>${total}</span>
+          <span>{total.toLocaleString()} ETB</span>
         </div>
       </div>
 
