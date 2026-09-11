@@ -177,11 +177,17 @@ body {
 }
 
 /* ============================================================
-   MOBILE OVERRIDES
+   MOBILE OVERRIDES — compact + zoomed out
    ============================================================ */
 @media (max-width: 767px) {
+  /* Base font smaller = whole site feels zoomed out */
   html {
-    font-size: 14px;
+    font-size: 13px;
+  }
+
+  /* Less padding everywhere */
+  body {
+    padding: 0;
   }
 
   .glass,
@@ -189,13 +195,13 @@ body {
     background: rgba(255, 255, 255, 0.94) !important;
     border-color: rgba(255, 255, 255, 0.7) !important;
     box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.18) !important;
-    border-radius: 1rem !important;
+    border-radius: 0.85rem !important;
   }
 
   .glass-dark {
     background: rgba(22, 18, 15, 0.9) !important;
     border-color: rgba(255, 255, 255, 0.14) !important;
-    border-radius: 1rem !important;
+    border-radius: 0.85rem !important;
   }
 
   .bg-white\/55,
@@ -204,7 +210,7 @@ body {
     background-color: rgba(255, 255, 255, 0.94) !important;
   }
 
-  /* Header — same DARK glass as desktop */
+  /* Header — dark glass, compact */
   header > div {
     background: linear-gradient(
       135deg,
@@ -212,7 +218,7 @@ body {
       rgba(26, 21, 18, 0.42) 100%
     ) !important;
     border-color: rgba(255, 255, 255, 0.2) !important;
-    border-radius: 0.75rem !important;
+    border-radius: 0.65rem !important;
     box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.5) !important;
     backdrop-filter: blur(40px) saturate(200%) !important;
     -webkit-backdrop-filter: blur(40px) saturate(200%) !important;
@@ -224,7 +230,7 @@ body {
     border-color: rgba(89, 54, 30, 0.15) !important;
     padding: 0.5rem 0.7rem !important;
     font-size: 15px !important;
-    border-radius: 0.6rem !important;
+    border-radius: 0.55rem !important;
     box-shadow: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
@@ -232,36 +238,56 @@ body {
 
   .btn-solid,
   .btn-glass {
-    padding: 0.5rem 1rem !important;
-    font-size: 0.8rem !important;
+    padding: 0.5rem 0.95rem !important;
+    font-size: 0.78rem !important;
     border-radius: 9999px !important;
   }
 
   .section-title {
-    font-size: 1.2rem !important;
+    font-size: 1.15rem !important;
     line-height: 1.25 !important;
   }
 
   .eyebrow {
-    font-size: 0.6rem !important;
+    font-size: 0.58rem !important;
   }
 
   .marquee-track article {
     background-color: rgba(22, 18, 15, 0.92) !important;
     border-color: rgba(255, 255, 255, 0.15) !important;
-    border-radius: 1rem !important;
+    border-radius: 0.85rem !important;
   }
 
+  /* Tighter section spacing */
   section.py-12 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  section.py-16 {
     padding-top: 1.75rem !important;
     padding-bottom: 1.75rem !important;
   }
-  section.py-16 {
+  section.py-20 {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
-  section.py-20 {
-    padding-top: 2.25rem !important;
-    padding-bottom: 2.25rem !important;
+
+  /* Reduce outer padding of page */
+  section.px-3,
+  section.px-4 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  /* Hero slideshow — smaller min-height so more content fits */
+  .relative.min-h-\[480px\] {
+    min-height: 380px !important;
+  }
+
+  /* Section headings tighter */
+  h1,
+  h2,
+  h3 {
+    word-spacing: -0.01em;
   }
 }
