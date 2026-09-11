@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { tours } from '@/lib/tours';
 import TourCard from '@/components/TourCard';
+import TourMarquee from '@/components/TourMarquee';
 
 const stats = [
   {
@@ -164,7 +165,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* STATS with animated gold dropdowns */}
+      {/* STATS */}
       <section className="relative z-30 px-3 pt-4 sm:px-4">
         <div className="mx-auto max-w-7xl rounded-3xl border border-white/60 bg-white/55 px-5 py-6 shadow-[0_8px_40px_-15px_rgba(89,54,30,0.2)] backdrop-blur-2xl sm:px-10 sm:py-8">
           <div className="grid grid-cols-2 gap-5 sm:gap-6 md:grid-cols-4">
@@ -180,17 +181,12 @@ export default function HomePage() {
                   {s.label}
                 </p>
 
-                {/* Cool dropdown */}
                 <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-4 w-72 -translate-x-1/2 translate-y-1 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 md:left-0 md:translate-x-0">
-                  {/* Glow halo */}
                   <div className="absolute -inset-1 rounded-[20px] bg-gradient-to-br from-amber-300/40 via-sand-500/25 to-transparent opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
 
-                  {/* Card */}
                   <div className="relative overflow-hidden rounded-2xl border border-amber-200/60 bg-gradient-to-br from-white via-white to-sand-50/90 shadow-[0_25px_70px_-20px_rgba(89,54,30,0.55)] backdrop-blur-2xl">
-                    {/* Top accent line */}
                     <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
 
-                    {/* Header */}
                     <div className="flex items-center gap-2.5 border-b border-sand-100 px-4 py-3">
                       <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-amber-100 to-sand-100 text-sm shadow-inner">
                         {s.icon}
@@ -200,7 +196,6 @@ export default function HomePage() {
                       </p>
                     </div>
 
-                    {/* List */}
                     <ul className="space-y-0.5 px-2.5 py-2.5">
                       {s.list.map((item) => (
                         <li
@@ -215,11 +210,9 @@ export default function HomePage() {
                       ))}
                     </ul>
 
-                    {/* Bottom shine */}
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white/60 to-transparent" />
                   </div>
 
-                  {/* Arrow */}
                   <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-amber-200/60 bg-white md:left-6 md:translate-x-0" />
                 </div>
               </div>
@@ -228,7 +221,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED */}
+      {/* FEATURED — scrollable marquee (auto + manual, all devices) */}
       <section className="py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -247,8 +240,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="marquee-mask mt-8 sm:mt-12">
-          <div className="marquee-track">
+        <div className="mt-8 sm:mt-12">
+          <TourMarquee>
             {featured.map((t) => (
               <div key={`a-${t.slug}`} className="w-[280px] shrink-0 sm:w-[340px]">
                 <TourCard tour={t} />
@@ -263,7 +256,7 @@ export default function HomePage() {
                 <TourCard tour={t} />
               </div>
             ))}
-          </div>
+          </TourMarquee>
         </div>
       </section>
 
