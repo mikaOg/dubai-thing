@@ -146,10 +146,10 @@ body {
 /* ---------- INFINITE MARQUEE ---------- */
 @keyframes marquee-scroll {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -159,15 +159,15 @@ body {
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
-    black 6%,
-    black 94%,
+    black 8%,
+    black 92%,
     transparent 100%
   );
   mask-image: linear-gradient(
     to right,
     transparent 0%,
-    black 6%,
-    black 94%,
+    black 8%,
+    black 92%,
     transparent 100%
   );
 }
@@ -176,12 +176,33 @@ body {
   display: flex;
   gap: 1.5rem;
   width: max-content;
-  animation: marquee-scroll 40s linear infinite;
+  animation: marquee-scroll 100s linear infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   will-change: transform;
 }
 
 .marquee-track:hover {
   animation-play-state: paused;
+}
+
+/* Lighter glass + no hover transforms inside the marquee → smooth on mobile */
+.marquee-track article {
+  backdrop-filter: blur(8px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  contain: layout paint;
+}
+
+.marquee-track article:hover {
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.marquee-track article img {
+  transform: none !important;
+  transition: none !important;
 }
 
 /* ---------- HERO SLIDESHOW ---------- */
