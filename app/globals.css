@@ -15,8 +15,15 @@ body {
     radial-gradient(900px 900px at 50% 120%, #b87333 0%, transparent 60%),
     radial-gradient(600px 500px at 20% 60%, #ffeed0 0%, transparent 60%),
     linear-gradient(180deg, #fdf3e2 0%, #f0d9b3 40%, #e2b982 100%);
-  background-attachment: fixed;
   background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Desktop: keep background fixed (nice parallax). Mobile: scrolls normally. */
+@media (min-width: 768px) {
+  body {
+    background-attachment: fixed;
+  }
 }
 
 /* ---------- GLASS UTILITIES ---------- */
@@ -77,7 +84,7 @@ body {
   }
 
   .glass-input {
-    @apply w-full rounded-xl border border-white/70 px-3.5 py-2.5 text-sm text-desert-900 outline-none transition placeholder:text-desert-800/40;
+    @apply w-full rounded-xl border border-white/70 px-3.5 py-3 text-base text-desert-900 outline-none transition placeholder:text-desert-800/40 sm:py-2.5 sm:text-sm;
     background: linear-gradient(
       135deg,
       rgba(255, 255, 255, 0.55) 0%,
@@ -130,11 +137,11 @@ body {
   }
 
   .section-title {
-    @apply text-3xl font-extrabold tracking-tight text-desert-900 sm:text-4xl;
+    @apply text-2xl font-extrabold tracking-tight text-desert-900 sm:text-3xl lg:text-4xl;
   }
 
   .eyebrow {
-    @apply text-xs font-bold uppercase tracking-[0.2em] text-sand-700;
+    @apply text-[11px] font-bold uppercase tracking-[0.2em] text-sand-700 sm:text-xs;
   }
 }
 
@@ -143,7 +150,7 @@ body {
   color: #1a1512;
 }
 
-/* ---------- INFINITE MARQUEE ---------- */
+/* ---------- MARQUEE (desktop only animation) ---------- */
 @keyframes marquee-scroll {
   0% {
     transform: translate3d(0, 0, 0);
@@ -156,43 +163,83 @@ body {
 .marquee-mask {
   position: relative;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
 }
 
 .marquee-track {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   width: max-content;
-  animation: marquee-scroll 100s linear infinite;
   transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  will-change: transform;
 }
 
-.marquee-track:hover {
-  animation-play-state: paused;
+/* Desktop: infinite auto-scroll */
+@media (min-width: 768px) {
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+  }
+
+  .marquee-track {
+    gap: 1.5rem;
+    animation: marquee-scroll 100s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
 }
 
-/* Lighter glass + no hover transforms inside the marquee → smooth on mobile */
+/* Mobile: native horizontal swipe with snap — no animation, no lag */
+@media (max-width: 767px) {
+  .marquee-mask {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+  }
+
+  .marquee-mask::-webkit-scrollbar {
+    display: none;
+  }
+
+  .marquee-track {
+    animation: none !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .marquee-track > div {
+    scroll-snap-align: center;
+  }
+
+  /* Hide the duplicate set on mobile — no need for a seamless loop */
+  .marquee-track > div[aria-hidden='true'] {
+    display: none;
+  }
+}
+
+/* Lighter glass inside marquee cards (both platforms) */
 .marquee-track article {
   backdrop-filter: blur(8px) saturate(140%) !important;
   -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
   transform: translate3d(0, 0, 0);
-  will-change: transform;
   contain: layout paint;
 }
 
@@ -201,7 +248,6 @@ body {
 }
 
 .marquee-track article img {
-  transform: none !important;
   transition: none !important;
 }
 
