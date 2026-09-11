@@ -7,6 +7,7 @@ const stats = [
   {
     value: '12+',
     label: 'Years guiding',
+    icon: '🏔️',
     list: [
       '2012 — Founded in Mekelle',
       '2015 — First Erta Ale expedition',
@@ -19,6 +20,7 @@ const stats = [
   {
     value: '4,800+',
     label: 'Travellers hosted',
+    icon: '🌍',
     list: [
       '2,140 from Europe',
       '1,020 from North America',
@@ -31,6 +33,7 @@ const stats = [
   {
     value: '100%',
     label: 'Local Ethiopian guides',
+    icon: '🧭',
     list: [
       '14 Afar-region guides',
       '9 Tigrayan cultural guides',
@@ -43,6 +46,7 @@ const stats = [
   {
     value: '4.9★',
     label: 'Average rating',
+    icon: '⭐',
     list: [
       '5.0★ — Danakil Photography Tour',
       '4.9★ — Erta Ale Volcano Trek',
@@ -160,7 +164,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* STATS with hover dropdowns */}
+      {/* STATS with animated gold dropdowns */}
       <section className="px-3 pt-4 sm:px-4">
         <div className="mx-auto max-w-7xl rounded-3xl border border-white/60 bg-white/55 px-5 py-6 shadow-[0_8px_40px_-15px_rgba(89,54,30,0.2)] backdrop-blur-2xl sm:px-10 sm:py-8">
           <div className="grid grid-cols-2 gap-5 sm:gap-6 md:grid-cols-4">
@@ -176,28 +180,50 @@ export default function HomePage() {
                   {s.label}
                 </p>
 
-                {/* Hover dropdown list */}
-                <div className="pointer-events-none absolute left-1/2 top-full z-40 mt-3 w-64 -translate-x-1/2 scale-95 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100 md:left-0 md:translate-x-0">
-                  <div className="overflow-hidden rounded-2xl border border-white/70 bg-white/95 shadow-[0_20px_60px_-20px_rgba(89,54,30,0.45)] backdrop-blur-2xl">
-                    <div className="border-b border-sand-100 bg-gradient-to-br from-sand-50 to-white px-4 py-2.5">
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-sand-700">
+                {/* Cool dropdown */}
+                <div className="pointer-events-none absolute left-1/2 top-full z-40 mt-4 w-72 -translate-x-1/2 translate-y-1 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 md:left-0 md:translate-x-0">
+                  {/* Glow halo */}
+                  <div className="absolute -inset-1 rounded-[20px] bg-gradient-to-br from-amber-300/40 via-sand-500/25 to-transparent opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
+
+                  {/* Card */}
+                  <div className="relative overflow-hidden rounded-2xl border border-amber-200/60 bg-gradient-to-br from-white via-white to-sand-50/90 shadow-[0_25px_70px_-20px_rgba(89,54,30,0.55)] backdrop-blur-2xl">
+                    {/* Top accent line */}
+                    <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
+
+                    {/* Header */}
+                    <div className="flex items-center gap-2.5 border-b border-sand-100 px-4 py-3">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-amber-100 to-sand-100 text-sm shadow-inner">
+                        {s.icon}
+                      </span>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-sand-800">
                         {s.label}
                       </p>
                     </div>
-                    <ul className="space-y-1 px-4 py-3">
-                      {s.list.map((item) => (
+
+                    {/* List */}
+                    <ul className="space-y-0.5 px-2.5 py-2.5">
+                      {s.list.map((item, i) => (
                         <li
                           key={item}
-                          className="flex items-start gap-2 text-xs leading-snug text-desert-800/85"
+                          className="group/item flex items-start gap-2.5 rounded-lg px-2 py-1.5 text-[12px] leading-snug text-desert-800 transition-colors duration-200 hover:bg-gradient-to-r hover:from-amber-50 hover:to-transparent"
+                          style={{
+                            transitionDelay: `${i * 30}ms`,
+                          }}
                         >
-                          <span className="mt-0.5 text-[10px] text-sand-500">◆</span>
-                          <span>{item}</span>
+                          <span className="mt-[3px] flex h-1.5 w-1.5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-amber-600 shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
+                          <span className="font-medium transition-colors duration-200 group-hover/item:text-desert-900">
+                            {item}
+                          </span>
                         </li>
                       ))}
                     </ul>
+
+                    {/* Bottom shine */}
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white/60 to-transparent" />
                   </div>
-                  {/* arrow */}
-                  <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-white/70 bg-white/95 md:left-6 md:translate-x-0" />
+
+                  {/* Arrow */}
+                  <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-amber-200/60 bg-white md:left-6 md:translate-x-0" />
                 </div>
               </div>
             ))}
