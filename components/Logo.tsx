@@ -6,7 +6,7 @@ export default function Logo({ light = false }: { light?: boolean }) {
       <svg
         viewBox="0 0 100 60"
         className="h-10 w-auto shrink-0 transition-transform duration-300 group-hover:scale-105 sm:h-11"
-        aria-label="Ethio Connect to Desert"
+        aria-label="Ethio Connect"
       >
         <rect x="20" y="6" width="42" height="3" rx="1" fill="#4a4a2f" />
         <rect x="23" y="9" width="2" height="3" fill="#4a4a2f" />
@@ -39,26 +39,17 @@ export default function Logo({ light = false }: { light?: boolean }) {
         <rect x="42" y="47" width="20" height="2" fill="#4a4a2f" />
       </svg>
 
-      <span className="flex flex-col leading-none">
-        <span
-          className="text-[15px] font-black tracking-tight text-amber-300 sm:text-[17px]"
-          style={{
-            fontFamily: 'ui-serif, Georgia, "Times New Roman", serif',
-            letterSpacing: '-0.02em',
-            textShadow: '0 2px 6px rgba(0,0,0,0.55), 0 0 20px rgba(251,191,36,0.25)',
-          }}
-        >
-          Ethio Connect
-        </span>
-        <span
-          className="mt-1 text-[8px] font-bold uppercase text-amber-100 sm:text-[9px]"
-          style={{
-            letterSpacing: '0.32em',
-            textShadow: '0 2px 6px rgba(0,0,0,0.55)',
-          }}
-        >
-          To Desert
-        </span>
+      <span
+        className={`text-[16px] font-black tracking-tight transition-colors sm:text-[18px] ${
+          light ? 'text-white' : 'text-amber-300'
+        }`}
+        style={{
+          fontFamily: 'ui-serif, Georgia, "Times New Roman", serif',
+          letterSpacing: '-0.02em',
+          textShadow: '0 2px 6px rgba(0,0,0,0.55), 0 0 20px rgba(251,191,36,0.25)',
+        }}
+      >
+        Ethio Connect
       </span>
     </Link>
   );
