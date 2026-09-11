@@ -49,12 +49,11 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4">
-      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-2xl border border-white/60 bg-white/20 shadow-[0_8px_32px_-8px_rgba(89,54,30,0.3),inset_0_1px_0_0_rgba(255,255,255,0.75)] backdrop-blur-2xl">
-        {/* glass shine */}
+    <header className="sticky top-0 z-50 px-2 pt-2 sm:px-4 sm:pt-4">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-xl border border-white/60 bg-white/20 shadow-[0_8px_32px_-8px_rgba(89,54,30,0.3),inset_0_1px_0_0_rgba(255,255,255,0.75)] backdrop-blur-2xl sm:rounded-2xl">
         <span className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/45 to-transparent" />
 
-        <div className="relative flex h-16 items-center justify-between px-4 sm:px-6">
+        <div className="relative flex h-14 items-center justify-between px-3 sm:h-16 sm:px-6">
           <Logo />
 
           <nav className="hidden items-center gap-1 md:flex">
@@ -125,12 +124,12 @@ export default function Header() {
 
           <button
             onClick={() => setOpen((v) => !v)}
-            className="rounded-full border border-white/60 bg-white/30 p-2.5 text-desert-900 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.7)] backdrop-blur-xl md:hidden"
+            className="rounded-full border border-white/60 bg-white/30 p-2 text-desert-900 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.7)] backdrop-blur-xl md:hidden"
             aria-label="Toggle menu"
           >
             <svg
               viewBox="0 0 24 24"
-              className="h-5 w-5"
+              className="h-4 w-4"
               fill="none"
               stroke="currentColor"
               strokeWidth={2}
@@ -146,29 +145,29 @@ export default function Header() {
 
         {open && (
           <div className="relative border-t border-white/40 md:hidden">
-            <div className="space-y-1 px-3 py-3">
+            <div className="space-y-0.5 px-2.5 py-2.5">
               {links.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-desert-800 transition hover:bg-white/45"
+                  className="block rounded-xl px-3 py-2 text-sm font-semibold text-desert-800 transition hover:bg-white/45"
                 >
                   {l.label}
                 </Link>
               ))}
 
-              <div className="mt-2 space-y-2 border-t border-white/40 pt-3">
+              <div className="mt-2 space-y-1.5 border-t border-white/40 pt-2.5">
                 {user ? (
                   <>
                     <Link
                       href="/dashboard"
-                      className="block rounded-xl border border-white/60 bg-white/40 px-3 py-2.5 text-center text-sm font-semibold text-desert-800 backdrop-blur-xl"
+                      className="block rounded-xl border border-white/60 bg-white/40 px-3 py-2 text-center text-sm font-semibold text-desert-800 backdrop-blur-xl"
                     >
                       My Bookings
                     </Link>
                     <button
                       onClick={handleSignOut}
-                      className="block w-full rounded-xl px-3 py-2.5 text-center text-sm font-semibold text-white"
+                      className="block w-full rounded-xl px-3 py-2 text-center text-sm font-semibold text-white"
                       style={{
                         background: 'linear-gradient(135deg, #3d3229 0%, #1a1512 100%)',
                       }}
@@ -180,13 +179,13 @@ export default function Header() {
                   <>
                     <Link
                       href="/auth/sign-in"
-                      className="block rounded-xl border border-white/60 bg-white/40 px-3 py-2.5 text-center text-sm font-semibold text-desert-800 backdrop-blur-xl"
+                      className="block rounded-xl border border-white/60 bg-white/40 px-3 py-2 text-center text-sm font-semibold text-desert-800 backdrop-blur-xl"
                     >
                       Sign in
                     </Link>
                     <Link
                       href="/auth/sign-up"
-                      className="block rounded-xl px-3 py-2.5 text-center text-sm font-semibold text-white"
+                      className="block rounded-xl px-3 py-2 text-center text-sm font-semibold text-white"
                       style={{
                         background: 'linear-gradient(135deg, #db9c4d 0%, #a86527 100%)',
                       }}
