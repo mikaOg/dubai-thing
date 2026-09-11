@@ -5,19 +5,19 @@ import { useEffect, useRef, type ReactNode } from 'react';
 export default function TourMarquee({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const pausedRef = useRef(false);
-  const resumeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    let raf = 0;
-    let last = performance.now();
-    const SPEED = 0.02; // pixels per millisecond (≈ 20 px/sec)
+    let rafId = 0;
+    let lastTime = performance.now();
+    const SPEED = 0.025; // pixels per ms
 
     const step = (now: number) => {
-      const dt = now - last;
-      last = now;
+      const dt = now - lastTime;
+      lastTime = now;
 
       if (!pausedRef.current) {
         const half = el.scrollWidth / 2;
@@ -28,33 +28,33 @@ export default function TourMarquee({ children }: { children: ReactNode }) {
         }
       }
 
-      raf = requestAnimationFrame(step);
+      rafId = requestAnimationFrame(step);
     };
 
-    raf = requestAnimationFrame(step);
+    rafId = requestAnimationFrame(step);
 
     const pause = () => {
       pausedRef.current = true;
-      if (resumeTimeout.current) {
-        clearTimeout(resumeTimeout.current);
-        resumeTimeout.current = null;
+      if (resumeTimer.current) {
+        clearTimeout(resumeTimer.current);
+        resumeTimer.current = null;
       }
     };
 
     const scheduleResume = () => {
-      if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
-      resumeTimeout.current = setTimeout(() => {
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
+      resumeTimer.current = setTimeout(() => {
         pausedRef.current = false;
-        last = performance.now();
+        lastTime = performance.now();
       }, 2000);
     };
 
     const onEnter = () => pause();
     const onLeave = () => scheduleResume();
+    const onDown = () => pause();
+    const onUp = () => scheduleResume();
     const onTouchStart = () => pause();
     const onTouchEnd = () => scheduleResume();
-    const onPointerDown = () => pause();
-    const onPointerUp = () => scheduleResume();
     const onWheel = () => {
       pause();
       scheduleResume();
@@ -62,19 +62,19 @@ export default function TourMarquee({ children }: { children: ReactNode }) {
 
     el.addEventListener('pointerenter', onEnter);
     el.addEventListener('pointerleave', onLeave);
-    el.addEventListener('pointerdown', onPointerDown);
-    el.addEventListener('pointerup', onPointerUp);
+    el.addEventListener('pointerdown', onDown);
+    el.addEventListener('pointerup', onUp);
     el.addEventListener('touchstart', onTouchStart, { passive: true });
     el.addEventListener('touchend', onTouchEnd, { passive: true });
     el.addEventListener('wheel', onWheel, { passive: true });
 
     return () => {
-      cancelAnimationFrame(raf);
-      if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
+      cancelAnimationFrame(rafId);
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
       el.removeEventListener('pointerenter', onEnter);
       el.removeEventListener('pointerleave', onLeave);
-      el.removeEventListener('pointerdown', onPointerDown);
-      el.removeEventListener('pointerup', onPointerUp);
+      el.removeEventListener('pointerdown', onDown);
+      el.removeEventListener('pointerup', onUp);
       el.removeEventListener('touchstart', onTouchStart);
       el.removeEventListener('touchend', onTouchEnd);
       el.removeEventListener('wheel', onWheel);
@@ -82,8 +82,33 @@ export default function TourMarquee({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <div ref={ref} className="marquee-mask">
-      <div className="marquee-track">{children}</div>
+    <div
+      ref={ref}
+      className="marquee-mask"
+      style={{
+        overflowX: 'auto',
+        overflowY: 'hidden',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        cursor: 'grab',
+        WebkitOverflowScrolling: 'touch',
+        WebkitMaskImage:
+          'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
+        maskImage:
+          'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          gap: '1rem',
+          width: 'max-content',
+          paddingLeft: '1rem',
+          paddingRight: '1rem',
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 }
