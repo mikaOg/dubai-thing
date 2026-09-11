@@ -177,17 +177,11 @@ body {
 }
 
 /* ============================================================
-   MOBILE OVERRIDES — compact + zoomed out
+   MOBILE OVERRIDES
    ============================================================ */
 @media (max-width: 767px) {
-  /* Base font smaller = whole site feels zoomed out */
   html {
     font-size: 13px;
-  }
-
-  /* Less padding everywhere */
-  body {
-    padding: 0;
   }
 
   .glass,
@@ -204,13 +198,6 @@ body {
     border-radius: 0.85rem !important;
   }
 
-  .bg-white\/55,
-  .bg-white\/60,
-  .bg-white\/65 {
-    background-color: rgba(255, 255, 255, 0.94) !important;
-  }
-
-  /* Header — dark glass, compact */
   header > div {
     background: linear-gradient(
       135deg,
@@ -258,36 +245,34 @@ body {
     border-radius: 0.85rem !important;
   }
 
-  /* Tighter section spacing */
-  section.py-12 {
+  /* Tighter spacing — uses plain selectors, no escaping needed */
+  .py-12 {
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
   }
-  section.py-16 {
+  .py-16 {
     padding-top: 1.75rem !important;
     padding-bottom: 1.75rem !important;
   }
-  section.py-20 {
+  .py-20 {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
-
-  /* Reduce outer padding of page */
-  section.px-3,
-  section.px-4 {
+  .px-3,
+  .px-4 {
     padding-left: 0.5rem !important;
     padding-right: 0.5rem !important;
   }
-
-  /* Hero slideshow — smaller min-height so more content fits */
-  .relative.min-h-\[480px\] {
-    min-height: 380px !important;
+  .px-5 {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
   }
-
-  /* Section headings tighter */
-  h1,
-  h2,
-  h3 {
-    word-spacing: -0.01em;
+  .py-14 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  .py-24 {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
   }
 }
