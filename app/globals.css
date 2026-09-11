@@ -8,42 +8,132 @@ html {
 
 body {
   @apply antialiased text-desert-900;
-  background:
-    radial-gradient(1200px 600px at 10% -10%, #f9ecd8 0%, transparent 60%),
-    radial-gradient(900px 500px at 90% 10%, #f1d5ab 0%, transparent 55%),
-    radial-gradient(1000px 700px at 50% 120%, #fdf8f1 0%, transparent 60%),
-    linear-gradient(180deg, #fffdf9 0%, #fdf8f1 100%);
+  background-color: #f7ecdc;
+  background-image:
+    radial-gradient(1200px 800px at 8% -8%, #ffd9a1 0%, transparent 55%),
+    radial-gradient(1000px 700px at 92% 8%, #e0b079 0%, transparent 55%),
+    radial-gradient(900px 900px at 50% 120%, #b87333 0%, transparent 60%),
+    radial-gradient(600px 500px at 20% 60%, #ffeed0 0%, transparent 60%),
+    linear-gradient(180deg, #fdf3e2 0%, #f0d9b3 40%, #e2b982 100%);
   background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 /* ---------- GLASS UTILITIES ---------- */
 @layer components {
+  /* BASE GLASS — heavy blur, translucent, with highlight edge */
   .glass {
-    @apply rounded-2xl border border-white/50 bg-white/55 shadow-[0_8px_40px_-12px_rgba(89,54,30,0.18)] backdrop-blur-2xl;
+    position: relative;
+    @apply rounded-3xl border border-white/60 shadow-[0_8px_32px_-8px_rgba(89,54,30,0.25),inset_0_1px_0_0_rgba(255,255,255,0.7)];
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.18) 100%
+    );
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
   }
 
+  /* STRONGER GLASS — more opaque, better for text-heavy panels */
   .glass-strong {
-    @apply rounded-2xl border border-white/60 bg-white/75 shadow-[0_10px_50px_-15px_rgba(89,54,30,0.25)] backdrop-blur-2xl;
+    position: relative;
+    @apply rounded-3xl border border-white/70 shadow-[0_10px_40px_-10px_rgba(89,54,30,0.3),inset_0_1px_0_0_rgba(255,255,255,0.85)];
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.62) 0%,
+      rgba(255, 255, 255, 0.38) 100%
+    );
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
   }
 
+  /* DARK GLASS — for sections on dark backgrounds */
   .glass-dark {
-    @apply rounded-2xl border border-white/15 bg-white/5 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.4)] backdrop-blur-2xl;
+    position: relative;
+    @apply rounded-3xl border border-white/15 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.12)];
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.09) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
   }
 
+  /* SHINY TOP EDGE — highlight streak across the top of any glass card */
+  .glass::before,
+  .glass-strong::before,
+  .glass-dark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.45) 0%,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0) 70%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    opacity: 0.9;
+    mix-blend-mode: overlay;
+  }
+
+  /* INPUTS — glassy fields */
   .glass-input {
-    @apply w-full rounded-xl border border-white/60 bg-white/60 px-3.5 py-2.5 text-sm text-desert-900 outline-none backdrop-blur-xl transition placeholder:text-desert-800/40 focus:border-sand-400 focus:bg-white/85 focus:ring-2 focus:ring-sand-200/70;
+    @apply w-full rounded-xl border border-white/70 px-3.5 py-2.5 text-sm text-desert-900 outline-none transition placeholder:text-desert-800/40;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.75);
+  }
+  .glass-input:focus {
+    @apply border-sand-400 ring-2 ring-sand-200/60;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0.6) 100%
+    );
   }
 
+  /* PILLS — small glass tags */
   .glass-pill {
-    @apply rounded-full border border-white/50 bg-white/60 backdrop-blur-xl;
+    @apply rounded-full border border-white/70 px-3.5 py-1.5 text-xs font-bold;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
   }
 
+  /* BUTTONS */
   .btn-glass {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/30 px-6 py-3 text-sm font-bold text-white backdrop-blur-xl transition hover:bg-white/45 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/60 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/35 active:scale-[0.98];
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.15) 100%
+    );
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5), 0 8px 24px -8px rgba(0,0,0,0.3);
   }
 
   .btn-solid {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-sand-500 to-sand-700 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sand-900/25 transition hover:from-sand-600 hover:to-sand-800 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white transition active:scale-[0.98];
+    background: linear-gradient(135deg, #db9c4d 0%, #a86527 100%);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.35), 0 10px 30px -10px rgba(168,101,39,0.65);
+  }
+  .btn-solid:hover {
+    background: linear-gradient(135deg, #e6b877 0%, #c98232 100%);
   }
 
   .section-title {
@@ -51,11 +141,10 @@ body {
   }
 
   .eyebrow {
-    @apply text-xs font-bold uppercase tracking-[0.2em] text-sand-600;
+    @apply text-xs font-bold uppercase tracking-[0.2em] text-sand-700;
   }
 }
 
-/* ---------- Nice scrollbar (subtle) ---------- */
 ::selection {
   background: #e6b877;
   color: #1a1512;
