@@ -1,11 +1,44 @@
-import type { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Contact',
-  description: 'Get in touch with Ethio Connect to Desert.',
-};
+import { useState } from 'react';
 
 export default function ContactPage() {
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('sending');
+    setError(null);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          full_name: fullName,
+          email,
+          message,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to send');
+      }
+
+      setStatus('sent');
+      setFullName('');
+      setEmail('');
+      setMessage('');
+    } catch (err) {
+      setError('Something went wrong. Please try again or email us directly.');
+      setStatus('error');
+    }
+  };
+
   return (
     <>
       <section className="bg-desert-900 py-16">
@@ -22,7 +55,7 @@ export default function ContactPage() {
           <div className="space-y-6">
             {[
               { t: 'Office', v: 'Hawelti Sub-city, Mekelle, Tigray, Ethiopia' },
-              { t: 'Email', v: 'hello@ethioconnecttodesert.com' },
+              { t: 'Email', v: 'thomasn4jackson08@gmail.com' },
               { t: 'Phone / WhatsApp', v: '+251 900 000 000' },
               { t: 'Hours', v: 'Monday – Saturday, 08:00 – 19:00 EAT' },
             ].map((c) => (
@@ -33,31 +66,70 @@ export default function ContactPage() {
             ))}
           </div>
 
-          <form className="space-y-4 rounded-2xl border border-sand-200 bg-white p-6 shadow-sm">
-            {['Full name', 'Email address'].map((label) => (
-              <div key={label}>
-                <label className="block text-sm font-semibold text-desert-800">{label}</label>
+          {status === 'sent' ? (
+            <div className="flex flex-col items-center justify-center rounded-2xl border border-green-200 bg-green-50 p-8 text-center">
+              <p className="text-4xl">✅</p>
+              <h2 className="mt-4 text-xl font-bold text-green-900">Message sent</h2>
+              <p className="mt-2 text-sm text-green-800/80">
+                Thanks for reaching out. We&apos;ll get back to you within a few hours.
+              </p>
+              <button
+                onClick={() => setStatus('idle')}
+                className="mt-6 rounded-full bg-green-700 px-6 py-2 text-sm font-bold text-white hover:bg-green-800"
+              >
+                Send another
+              </button>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-4 rounded-2xl border border-sand-200 bg-white p-6 shadow-sm"
+            >
+              {error && (
+                <div className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</div>
+              )}
+
+              <div>
+                <label className="block text-sm font-semibold text-desert-800">Full name</label>
                 <input
-                  className="mt-1 w-full rounded-lg border border-sand-300 px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
                   required
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  className="mt-1 w-full rounded-lg border border-sand-300 px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
                 />
               </div>
-            ))}
-            <div>
-              <label className="block text-sm font-semibold text-desert-800">Message</label>
-              <textarea
-                rows={5}
-                required
-                className="mt-1 w-full resize-none rounded-lg border border-sand-300 px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full rounded-full bg-sand-600 py-3 text-sm font-bold text-white hover:bg-sand-700"
-            >
-              Send message
-            </button>
-          </form>
+
+              <div>
+                <label className="block text-sm font-semibold text-desert-800">Email address</label>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="mt-1 w-full rounded-lg border border-sand-300 px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-desert-800">Message</label>
+                <textarea
+                  rows={5}
+                  required
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className="mt-1 w-full resize-none rounded-lg border border-sand-300 px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={status === 'sending'}
+                className="w-full rounded-full bg-sand-600 py-3 text-sm font-bold text-white hover:bg-sand-700 disabled:opacity-60"
+              >
+                {status === 'sending' ? 'Sending...' : 'Send message'}
+              </button>
+            </form>
+          )}
         </div>
       </section>
     </>
