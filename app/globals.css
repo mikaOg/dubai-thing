@@ -136,7 +136,7 @@ body {
   color: #1a1512;
 }
 
-/* ---------- MARQUEE (scrollable on ALL devices) ---------- */
+/* ---------- MARQUEE ---------- */
 .marquee-mask {
   position: relative;
   overflow-x: auto;
@@ -145,7 +145,6 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
-
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -160,10 +159,6 @@ body {
     black 94%,
     transparent 100%
   );
-}
-
-.marquee-mask:active {
-  cursor: grabbing;
 }
 
 .marquee-mask::-webkit-scrollbar {
@@ -186,12 +181,7 @@ body {
   }
 }
 
-.marquee-track article {
-  contain: layout paint;
-}
-
 .marquee-track article img {
-  transition: none !important;
   pointer-events: none;
 }
 
