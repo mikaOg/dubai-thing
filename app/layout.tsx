@@ -27,6 +27,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={inter.variable}>
       <body className="flex min-h-screen flex-col font-sans">
+        {/* Desktop background — hidden on mobile */}
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 -z-20 hidden bg-cover bg-center bg-no-repeat md:block"
+          style={{ backgroundImage: "url('/tours/hero-4.jpg')" }}
+        />
+
+        {/* Mobile background — hidden on desktop. Uses <img> for reliability. */}
+        <img
+          aria-hidden
+          src="/tours/hero-4-mobile.jpg"
+          alt=""
+          className="pointer-events-none fixed inset-0 -z-20 h-full w-full object-cover md:hidden"
+        />
+
+        {/* Dark overlay for text contrast */}
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 -z-10"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(26,21,18,0.55) 0%, rgba(26,21,18,0.45) 40%, rgba(26,21,18,0.65) 100%)',
+          }}
+        />
+
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
