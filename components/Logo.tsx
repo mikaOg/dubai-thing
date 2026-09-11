@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 export default function Logo({ light = false }: { light?: boolean }) {
   return (
-    <Link href="/" className="group flex items-center">
+    <Link href="/" className="group flex items-center gap-2.5 sm:gap-3">
       <svg
         viewBox="0 0 100 60"
-        className="h-10 w-auto transition-transform duration-300 group-hover:scale-105 sm:h-11"
+        className="h-10 w-auto shrink-0 transition-transform duration-300 group-hover:scale-105 sm:h-11"
         aria-label="Ethio Connect to Desert"
       >
         <rect x="20" y="6" width="42" height="3" rx="1" fill="#4a4a2f" />
@@ -38,6 +38,29 @@ export default function Logo({ light = false }: { light?: boolean }) {
         <circle cx="32" cy="48" r="1.5" fill="#3d4466" />
         <rect x="42" y="47" width="20" height="2" fill="#4a4a2f" />
       </svg>
+
+      <span className="flex flex-col leading-none">
+        <span
+          className={`text-[15px] font-black tracking-tight transition-colors sm:text-[17px] ${
+            light ? 'text-white' : 'text-desert-900'
+          }`}
+          style={{
+            fontFamily:
+              'ui-serif, Georgia, "Times New Roman", serif',
+            letterSpacing: '-0.02em',
+          }}
+        >
+          Ethio Connect
+        </span>
+        <span
+          className={`mt-1 text-[8px] font-bold uppercase sm:text-[9px] ${
+            light ? 'text-amber-200' : 'text-amber-600'
+          }`}
+          style={{ letterSpacing: '0.32em' }}
+        >
+          To Desert
+        </span>
+      </span>
     </Link>
   );
 }
