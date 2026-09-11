@@ -37,7 +37,7 @@ body::before {
   z-index: -1;
 }
 
-/* ---------- GLASS UTILITIES ---------- */
+/* ---------- GLASS UTILITIES (desktop) ---------- */
 @layer components {
   .glass {
     position: relative;
@@ -152,7 +152,7 @@ body::before {
   }
 
   .eyebrow {
-    @apply text-[11px] font-bold uppercase tracking-[0.2em] text-sand-300 drop-shadow sm:text-xs;
+    @apply text-[11px] font-bold uppercase tracking-[0.2em] text-amber-200 drop-shadow sm:text-xs;
   }
 }
 
@@ -281,4 +281,103 @@ body::before {
   opacity: 0;
   animation: hero-slide 8s ease-in-out infinite;
   animation-fill-mode: both;
+}
+
+/* ============================================================
+   MOBILE OVERRIDES — kill blur, use solid backgrounds
+   This is what makes phones smooth + comfortable
+   ============================================================ */
+@media (max-width: 767px) {
+  /* Slower / cheaper background rendering */
+  body {
+    background-attachment: scroll;
+    background-size: cover;
+  }
+
+  /* Stronger overlay so text stays readable with no blur */
+  body::before {
+    background: linear-gradient(
+      180deg,
+      rgba(20, 16, 13, 0.72) 0%,
+      rgba(20, 16, 13, 0.65) 40%,
+      rgba(20, 16, 13, 0.78) 100%
+    );
+  }
+
+  /* --- Replace every glass with a clean solid dark card --- */
+  .glass,
+  .glass-strong,
+  .glass-dark {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: 0 6px 20px -10px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .glass {
+    background: rgba(28, 22, 18, 0.82) !important;
+    border-color: rgba(255, 255, 255, 0.18) !important;
+  }
+
+  .glass-strong {
+    background: rgba(30, 24, 20, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+  }
+
+  .glass-dark {
+    background: rgba(22, 18, 15, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.14) !important;
+  }
+
+  /* Kill the shine stripe on mobile — cleaner */
+  .glass::before,
+  .glass-strong::before,
+  .glass-dark::before {
+    opacity: 0.4;
+  }
+
+  /* Inputs: solid white so text is crisp */
+  .glass-input {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 16px !important; /* prevents iOS auto-zoom */
+  }
+
+  .glass-input:focus {
+    background: #ffffff !important;
+  }
+
+  /* Buttons — no blur */
+  .btn-glass {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(30, 24, 20, 0.75) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+  }
+
+  .btn-solid {
+    box-shadow: 0 8px 20px -8px rgba(168, 101, 39, 0.5) !important;
+  }
+
+  /* Pills */
+  .glass-pill {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(30, 24, 20, 0.7) !important;
+  }
+
+  /* Tour cards in marquee — solid dark */
+  .marquee-track article {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Header — solid dark glass on mobile */
+  header > div {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(20, 16, 13, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.18) !important;
+  }
 }
