@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           className="pointer-events-none fixed inset-0 -z-20 hidden h-full w-full object-cover md:block"
         />
 
-        {/* Mobile background (portrait) */}
+        {/* Mobile portrait background */}
         <img
           aria-hidden
           src="/tours/hero-4-mobile.jpg"
