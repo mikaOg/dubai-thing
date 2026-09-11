@@ -37,7 +37,7 @@ body::before {
   z-index: -1;
 }
 
-/* ---------- GLASS UTILITIES (desktop) ---------- */
+/* ---------- GLASS UTILITIES ---------- */
 @layer components {
   .glass {
     position: relative;
@@ -284,100 +284,117 @@ body::before {
 }
 
 /* ============================================================
-   MOBILE OVERRIDES — kill blur, use solid backgrounds
-   This is what makes phones smooth + comfortable
+   MOBILE OVERRIDES — light, compact, fast
+   Desktop is untouched. This block only applies under 768px.
    ============================================================ */
 @media (max-width: 767px) {
-  /* Slower / cheaper background rendering */
-  body {
-    background-attachment: scroll;
-    background-size: cover;
+  /* 1. Kill every blur — this is what was making phones look mushy */
+  *,
+  *::before,
+  *::after {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
-  /* Stronger overlay so text stays readable with no blur */
+  /* 2. Shrink everything ~15% — this is the "make it smaller" part */
+  html {
+    font-size: 14px;
+  }
+
+  /* 3. Lighter overlay so the photo shows but text stays readable */
   body::before {
     background: linear-gradient(
       180deg,
-      rgba(20, 16, 13, 0.72) 0%,
-      rgba(20, 16, 13, 0.65) 40%,
-      rgba(20, 16, 13, 0.78) 100%
+      rgba(26, 21, 18, 0.5) 0%,
+      rgba(26, 21, 18, 0.4) 40%,
+      rgba(26, 21, 18, 0.55) 100%
     );
   }
 
-  /* --- Replace every glass with a clean solid dark card --- */
+  /* 4. Glass → clean solid LIGHT cards (undoing the dark look) */
   .glass,
-  .glass-strong,
-  .glass-dark {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    box-shadow: 0 6px 20px -10px rgba(0, 0, 0, 0.5) !important;
-  }
-
-  .glass {
-    background: rgba(28, 22, 18, 0.82) !important;
-    border-color: rgba(255, 255, 255, 0.18) !important;
-  }
-
   .glass-strong {
-    background: rgba(30, 24, 20, 0.9) !important;
-    border-color: rgba(255, 255, 255, 0.22) !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    border-color: rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.18) !important;
+    border-radius: 1rem !important;
   }
 
   .glass-dark {
-    background: rgba(22, 18, 15, 0.85) !important;
+    background: rgba(22, 18, 15, 0.9) !important;
     border-color: rgba(255, 255, 255, 0.14) !important;
+    border-radius: 1rem !important;
   }
 
-  /* Kill the shine stripe on mobile — cleaner */
-  .glass::before,
-  .glass-strong::before,
-  .glass-dark::before {
-    opacity: 0.4;
+  /* Tailwind white utility cards → solid light */
+  .bg-white\/55,
+  .bg-white\/60,
+  .bg-white\/65 {
+    background-color: rgba(255, 255, 255, 0.94) !important;
   }
 
-  /* Inputs: solid white so text is crisp */
-  .glass-input {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    border-color: rgba(255, 255, 255, 0.5) !important;
-    font-size: 16px !important; /* prevents iOS auto-zoom */
-  }
-
-  .glass-input:focus {
-    background: #ffffff !important;
-  }
-
-  /* Buttons — no blur */
-  .btn-glass {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: rgba(30, 24, 20, 0.75) !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
-  }
-
-  .btn-solid {
-    box-shadow: 0 8px 20px -8px rgba(168, 101, 39, 0.5) !important;
-  }
-
-  /* Pills */
-  .glass-pill {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: rgba(30, 24, 20, 0.7) !important;
-  }
-
-  /* Tour cards in marquee — solid dark */
-  .marquee-track article {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  /* Header — solid dark glass on mobile */
+  /* 5. Header → clean, light-tinted solid (not dark) */
   header > div {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: rgba(20, 16, 13, 0.85) !important;
-    border-color: rgba(255, 255, 255, 0.18) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.7) !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  /* 6. Inputs — solid white, sharp text, no iOS zoom */
+  .glass-input {
+    background: #ffffff !important;
+    color: #1a1512 !important;
+    border-color: rgba(89, 54, 30, 0.15) !important;
+    padding: 0.55rem 0.75rem !important;
+    font-size: 15px !important;
+    border-radius: 0.6rem !important;
+    box-shadow: none !important;
+  }
+
+  /* 7. Buttons — tighter */
+  .btn-solid,
+  .btn-glass {
+    padding: 0.55rem 1.1rem !important;
+    font-size: 0.8125rem !important;
+    border-radius: 9999px !important;
+  }
+
+  .btn-glass {
+    background: rgba(255, 255, 255, 0.92) !important;
+    color: #1a1512 !important;
+    border-color: rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  /* 8. Headings — smaller */
+  .section-title {
+    font-size: 1.25rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .eyebrow {
+    font-size: 0.625rem !important;
+  }
+
+  /* 9. Tour cards — keep dark (for the gold/white text) but compact */
+  .marquee-track article {
+    background-color: rgba(22, 18, 15, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 1rem !important;
+  }
+
+  /* 10. Vertical rhythm — shorter gaps between sections */
+  section.py-12 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  section.py-16 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  section.py-20 {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
   }
 }
