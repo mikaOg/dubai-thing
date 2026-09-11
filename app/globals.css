@@ -161,7 +161,7 @@ body::before {
   color: #1a1512;
 }
 
-/* ---------- MARQUEE ---------- */
+/* ---------- MARQUEE (auto-scroll on BOTH mobile and desktop) ---------- */
 @keyframes marquee-scroll {
   0% {
     transform: translate3d(0, 0, 0);
@@ -174,6 +174,20 @@ body::before {
 .marquee-mask {
   position: relative;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
 }
 
 .marquee-track {
@@ -181,71 +195,25 @@ body::before {
   gap: 1rem;
   width: max-content;
   transform: translate3d(0, 0, 0);
+  animation: marquee-scroll 90s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-@media (min-width: 768px) {
-  .marquee-mask {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 8%,
-      black 92%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 8%,
-      black 92%,
-      transparent 100%
-    );
-  }
+.marquee-track:hover {
+  animation-play-state: paused;
+}
 
+/* Desktop: slightly slower */
+@media (min-width: 768px) {
   .marquee-track {
     gap: 1.5rem;
-    animation: marquee-scroll 100s linear infinite;
-    will-change: transform;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-
-  .marquee-track:hover {
-    animation-play-state: paused;
-  }
-}
-
-@media (max-width: 767px) {
-  .marquee-mask {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    padding-bottom: 0.5rem;
-  }
-
-  .marquee-mask::-webkit-scrollbar {
-    display: none;
-  }
-
-  .marquee-track {
-    animation: none !important;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .marquee-track > div {
-    scroll-snap-align: center;
-  }
-
-  .marquee-track > div[aria-hidden='true'] {
-    display: none;
+    animation-duration: 100s;
   }
 }
 
 .marquee-track article {
-  backdrop-filter: blur(8px) saturate(140%) !important;
-  -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
   transform: translate3d(0, 0, 0);
   contain: layout paint;
 }
@@ -288,7 +256,7 @@ body::before {
    Desktop is untouched. This block only applies under 768px.
    ============================================================ */
 @media (max-width: 767px) {
-  /* 1. Kill every blur — this is what was making phones look mushy */
+  /* 1. Kill blur for smooth animation + sharp rendering */
   *,
   *::before,
   *::after {
@@ -296,7 +264,7 @@ body::before {
     -webkit-backdrop-filter: none !important;
   }
 
-  /* 2. Shrink everything ~15% — this is the "make it smaller" part */
+  /* 2. Shrink everything ~15% */
   html {
     font-size: 14px;
   }
@@ -311,7 +279,7 @@ body::before {
     );
   }
 
-  /* 4. Glass → clean solid LIGHT cards (undoing the dark look) */
+  /* 4. Glass → clean solid LIGHT cards */
   .glass,
   .glass-strong {
     background: rgba(255, 255, 255, 0.94) !important;
@@ -326,14 +294,13 @@ body::before {
     border-radius: 1rem !important;
   }
 
-  /* Tailwind white utility cards → solid light */
   .bg-white\/55,
   .bg-white\/60,
   .bg-white\/65 {
     background-color: rgba(255, 255, 255, 0.94) !important;
   }
 
-  /* 5. Header → clean, light-tinted solid (not dark) */
+  /* 5. Header → light solid */
   header > div {
     background: rgba(255, 255, 255, 0.95) !important;
     border-color: rgba(255, 255, 255, 0.7) !important;
@@ -341,7 +308,7 @@ body::before {
     box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.2) !important;
   }
 
-  /* 6. Inputs — solid white, sharp text, no iOS zoom */
+  /* 6. Inputs — solid white, sharp text */
   .glass-input {
     background: #ffffff !important;
     color: #1a1512 !important;
@@ -377,14 +344,14 @@ body::before {
     font-size: 0.625rem !important;
   }
 
-  /* 9. Tour cards — keep dark (for the gold/white text) but compact */
+  /* 9. Tour cards — dark, compact, STILL ANIMATED */
   .marquee-track article {
-    background-color: rgba(22, 18, 15, 0.9) !important;
+    background-color: rgba(22, 18, 15, 0.92) !important;
     border-color: rgba(255, 255, 255, 0.15) !important;
     border-radius: 1rem !important;
   }
 
-  /* 10. Vertical rhythm — shorter gaps between sections */
+  /* 10. Vertical rhythm — shorter gaps */
   section.py-12 {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
