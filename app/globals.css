@@ -183,3 +183,28 @@ body {
 .marquee-track:hover {
   animation-play-state: paused;
 }
+
+/* ---------- HERO SLIDESHOW ---------- */
+@keyframes hero-slide {
+  0% {
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  22% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hero-slide-img {
+  opacity: 0;
+  animation: hero-slide 8s ease-in-out infinite;
+  animation-fill-mode: both;
+}
