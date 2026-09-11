@@ -9,20 +9,24 @@ html {
 body {
   @apply antialiased text-desert-900;
   background-color: #2a221c;
+  min-height: 100vh;
+}
+
+/* Fixed background image — sharp on all screens because it only
+   needs to cover the viewport, not the full page height */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
   background-image: url('/tours/hero-4.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: scroll;
-  min-height: 100vh;
+  z-index: -2;
+  pointer-events: none;
 }
 
-@media (min-width: 768px) {
-  body {
-    background-attachment: fixed;
-  }
-}
-
+/* Dark overlay for text contrast */
 body::before {
   content: '';
   position: fixed;
@@ -161,7 +165,7 @@ body::before {
   color: #1a1512;
 }
 
-/* ---------- MARQUEE (auto-scroll on BOTH mobile and desktop) ---------- */
+/* ---------- MARQUEE ---------- */
 @keyframes marquee-scroll {
   0% {
     transform: translate3d(0, 0, 0);
@@ -205,7 +209,6 @@ body::before {
   animation-play-state: paused;
 }
 
-/* Desktop: slightly slower */
 @media (min-width: 768px) {
   .marquee-track {
     gap: 1.5rem;
@@ -253,10 +256,9 @@ body::before {
 
 /* ============================================================
    MOBILE OVERRIDES — light, compact, fast
-   Desktop is untouched. This block only applies under 768px.
    ============================================================ */
 @media (max-width: 767px) {
-  /* 1. Kill blur for smooth animation + sharp rendering */
+  /* 1. Kill blur for smooth rendering */
   *,
   *::before,
   *::after {
@@ -264,18 +266,18 @@ body::before {
     -webkit-backdrop-filter: none !important;
   }
 
-  /* 2. Shrink everything ~15% */
+  /* 2. Shrink everything slightly (~12.5%) for comfort */
   html {
     font-size: 14px;
   }
 
-  /* 3. Lighter overlay so the photo shows but text stays readable */
+  /* 3. Lighter overlay on mobile so the photo shows through */
   body::before {
     background: linear-gradient(
       180deg,
-      rgba(26, 21, 18, 0.5) 0%,
-      rgba(26, 21, 18, 0.4) 40%,
-      rgba(26, 21, 18, 0.55) 100%
+      rgba(26, 21, 18, 0.42) 0%,
+      rgba(26, 21, 18, 0.32) 40%,
+      rgba(26, 21, 18, 0.48) 100%
     );
   }
 
@@ -308,12 +310,12 @@ body::before {
     box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.2) !important;
   }
 
-  /* 6. Inputs — solid white, sharp text */
+  /* 6. Inputs — solid white, sharp text, no iOS zoom */
   .glass-input {
     background: #ffffff !important;
     color: #1a1512 !important;
     border-color: rgba(89, 54, 30, 0.15) !important;
-    padding: 0.55rem 0.75rem !important;
+    padding: 0.5rem 0.7rem !important;
     font-size: 15px !important;
     border-radius: 0.6rem !important;
     box-shadow: none !important;
@@ -322,8 +324,8 @@ body::before {
   /* 7. Buttons — tighter */
   .btn-solid,
   .btn-glass {
-    padding: 0.55rem 1.1rem !important;
-    font-size: 0.8125rem !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 0.8rem !important;
     border-radius: 9999px !important;
   }
 
@@ -336,32 +338,32 @@ body::before {
 
   /* 8. Headings — smaller */
   .section-title {
-    font-size: 1.25rem !important;
+    font-size: 1.2rem !important;
     line-height: 1.25 !important;
   }
 
   .eyebrow {
-    font-size: 0.625rem !important;
+    font-size: 0.6rem !important;
   }
 
-  /* 9. Tour cards — dark, compact, STILL ANIMATED */
+  /* 9. Tour cards — dark, compact, animated */
   .marquee-track article {
     background-color: rgba(22, 18, 15, 0.92) !important;
     border-color: rgba(255, 255, 255, 0.15) !important;
     border-radius: 1rem !important;
   }
 
-  /* 10. Vertical rhythm — shorter gaps */
+  /* 10. Shorter section spacing */
   section.py-12 {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+    padding-top: 1.75rem !important;
+    padding-bottom: 1.75rem !important;
   }
   section.py-16 {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
   section.py-20 {
-    padding-top: 2.5rem !important;
-    padding-bottom: 2.5rem !important;
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.25rem !important;
   }
 }
