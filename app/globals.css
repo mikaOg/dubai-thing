@@ -12,7 +12,6 @@ body {
   min-height: 100vh;
 }
 
-/* ---------- GLASS UTILITIES ---------- */
 @layer components {
   .glass {
     position: relative;
@@ -50,25 +49,6 @@ body {
     -webkit-backdrop-filter: blur(24px) saturate(160%);
   }
 
-  .glass::before,
-  .glass-strong::before,
-  .glass-dark::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.45) 0%,
-      rgba(255, 255, 255, 0) 30%,
-      rgba(255, 255, 255, 0) 70%,
-      rgba(255, 255, 255, 0.06) 100%
-    );
-    opacity: 0.9;
-    mix-blend-mode: overlay;
-  }
-
   .glass-input {
     @apply w-full rounded-xl border border-white/70 px-3.5 py-3 text-base text-desert-900 outline-none transition placeholder:text-desert-800/40 sm:py-2.5 sm:text-sm;
     background: linear-gradient(
@@ -87,18 +67,6 @@ body {
       rgba(255, 255, 255, 0.95) 0%,
       rgba(255, 255, 255, 0.75) 100%
     );
-  }
-
-  .glass-pill {
-    @apply rounded-full border border-white/70 px-3.5 py-1.5 text-xs font-bold;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.6) 0%,
-      rgba(255, 255, 255, 0.3) 100%
-    );
-    backdrop-filter: blur(18px) saturate(180%);
-    -webkit-backdrop-filter: blur(18px) saturate(180%);
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
   }
 
   .btn-glass {
@@ -136,7 +104,6 @@ body {
   color: #1a1512;
 }
 
-/* ---------- MARQUEE ---------- */
 .marquee-mask {
   position: relative;
   overflow-x: auto;
@@ -185,7 +152,6 @@ body {
   pointer-events: none;
 }
 
-/* ---------- HERO SLIDESHOW ---------- */
 @keyframes hero-slide {
   0% {
     opacity: 0;
@@ -210,9 +176,6 @@ body {
   animation-fill-mode: both;
 }
 
-/* ============================================================
-   MOBILE OVERRIDES
-   ============================================================ */
 @media (max-width: 767px) {
   *,
   *::before,
