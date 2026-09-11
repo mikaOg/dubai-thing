@@ -41,22 +41,21 @@ export default function Logo({ light = false }: { light?: boolean }) {
 
       <span className="flex flex-col leading-none">
         <span
-          className={`text-[15px] font-black tracking-tight transition-colors sm:text-[17px] ${
-            light ? 'text-white' : 'text-desert-900'
-          }`}
+          className="text-[15px] font-black tracking-tight text-amber-300 sm:text-[17px]"
           style={{
-            fontFamily:
-              'ui-serif, Georgia, "Times New Roman", serif',
+            fontFamily: 'ui-serif, Georgia, "Times New Roman", serif',
             letterSpacing: '-0.02em',
+            textShadow: '0 2px 6px rgba(0,0,0,0.55), 0 0 20px rgba(251,191,36,0.25)',
           }}
         >
           Ethio Connect
         </span>
         <span
-          className={`mt-1 text-[8px] font-bold uppercase sm:text-[9px] ${
-            light ? 'text-amber-200' : 'text-amber-600'
-          }`}
-          style={{ letterSpacing: '0.32em' }}
+          className="mt-1 text-[8px] font-bold uppercase text-amber-100 sm:text-[9px]"
+          style={{
+            letterSpacing: '0.32em',
+            textShadow: '0 2px 6px rgba(0,0,0,0.55)',
+          }}
         >
           To Desert
         </span>
