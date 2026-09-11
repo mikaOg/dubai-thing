@@ -52,7 +52,7 @@ const testimonials = [
 ];
 
 export default function HomePage() {
-  const featured = tours;
+  const featured = tours.slice(0, 4);
 
   return (
     <>
@@ -129,7 +129,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED — infinite auto-scrolling marquee */}
+      {/* FEATURED — slow, smooth marquee */}
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -149,7 +149,7 @@ export default function HomePage() {
         <div className="marquee-mask mt-12">
           <div className="marquee-track">
             {featured.map((t) => (
-              <div key={`a-${t.slug}`} className="w-[320px] shrink-0 sm:w-[360px]">
+              <div key={`a-${t.slug}`} className="w-[300px] shrink-0 sm:w-[340px]">
                 <TourCard tour={t} />
               </div>
             ))}
@@ -157,7 +157,7 @@ export default function HomePage() {
               <div
                 key={`b-${t.slug}`}
                 aria-hidden="true"
-                className="w-[320px] shrink-0 sm:w-[360px]"
+                className="w-[300px] shrink-0 sm:w-[340px]"
               >
                 <TourCard tour={t} />
               </div>
