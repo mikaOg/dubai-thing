@@ -52,7 +52,7 @@ const testimonials = [
 ];
 
 export default function HomePage() {
-  const featured = tours.slice(0, 3);
+  const featured = tours;
 
   return (
     <>
@@ -120,25 +120,40 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED */}
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="eyebrow">Featured departures</p>
-            <h2 className="section-title mt-3">Our most-booked desert tours</h2>
+      {/* FEATURED — infinite auto-scrolling marquee */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="eyebrow">Featured departures</p>
+              <h2 className="section-title mt-3">Our most-booked desert tours</h2>
+            </div>
+            <Link
+              href="/tours"
+              className="shrink-0 text-sm font-bold text-sand-700 hover:text-sand-800"
+            >
+              View all tours →
+            </Link>
           </div>
-          <Link
-            href="/tours"
-            className="shrink-0 text-sm font-bold text-sand-700 hover:text-sand-800"
-          >
-            View all tours →
-          </Link>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featured.map((t) => (
-            <TourCard key={t.slug} tour={t} />
-          ))}
+        <div className="marquee-mask mt-12">
+          <div className="marquee-track">
+            {featured.map((t) => (
+              <div key={`a-${t.slug}`} className="w-[320px] shrink-0 sm:w-[360px]">
+                <TourCard tour={t} />
+              </div>
+            ))}
+            {featured.map((t) => (
+              <div
+                key={`b-${t.slug}`}
+                aria-hidden="true"
+                className="w-[320px] shrink-0 sm:w-[360px]"
+              >
+                <TourCard tour={t} />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
