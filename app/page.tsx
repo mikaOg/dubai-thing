@@ -221,7 +221,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED — scrollable marquee (auto + manual, all devices) */}
+      {/* FEATURED */}
       <section className="py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
