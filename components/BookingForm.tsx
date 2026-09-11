@@ -58,36 +58,47 @@ export default function BookingForm({ tour }: { tour: Tour }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-sand-200 bg-white p-6 shadow-lg"
+      className="rounded-3xl border border-white/60 bg-white/65 p-6 shadow-[0_15px_60px_-20px_rgba(89,54,30,0.35)] backdrop-blur-2xl"
     >
-      <h3 className="text-lg font-bold text-desert-900">Book this tour</h3>
+      <div className="flex items-baseline justify-between">
+        <h3 className="text-lg font-extrabold text-desert-900">Book this tour</h3>
+        <span className="rounded-full border border-white/60 bg-white/60 px-3 py-1 text-[11px] font-bold text-sand-700 backdrop-blur-xl">
+          From {tour.price.toLocaleString()} ETB
+        </span>
+      </div>
       <p className="mt-1 text-sm text-desert-800/60">
         Free cancellation up to 7 days before departure.
       </p>
 
       {error && (
-        <div className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</div>
+        <div className="mt-4 rounded-xl border border-red-200/70 bg-red-50/80 p-3 text-sm text-red-700 backdrop-blur-xl">
+          {error}
+        </div>
       )}
 
       <div className="mt-5 space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-desert-800">Travel date</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-desert-800/70">
+            Travel date
+          </label>
           <input
             type="date"
             required
             min={new Date().toISOString().split('T')[0]}
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-sand-300 px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
+            className="glass-input mt-1.5"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-desert-800">Guests</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-desert-800/70">
+            Guests
+          </label>
           <select
             value={guests}
             onChange={(e) => setGuests(Number(e.target.value))}
-            className="mt-1 w-full rounded-lg border border-sand-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
+            className="glass-input mt-1.5"
           >
             {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
               <option key={n} value={n}>
@@ -98,49 +109,53 @@ export default function BookingForm({ tour }: { tour: Tour }) {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-desert-800">Full name</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-desert-800/70">
+            Full name
+          </label>
           <input
             required
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             placeholder="As on your passport"
-            className="mt-1 w-full rounded-lg border border-sand-300 px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
+            className="glass-input mt-1.5"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-desert-800">Phone / WhatsApp</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-desert-800/70">
+            Phone / WhatsApp
+          </label>
           <input
             required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="+251 ..."
-            className="mt-1 w-full rounded-lg border border-sand-300 px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
+            className="glass-input mt-1.5"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-desert-800">
-            Notes <span className="font-normal text-desert-800/50">(optional)</span>
+          <label className="block text-xs font-bold uppercase tracking-wider text-desert-800/70">
+            Notes <span className="font-normal normal-case text-desert-800/40">(optional)</span>
           </label>
           <textarea
             rows={3}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Dietary needs, pickup location, questions..."
-            className="mt-1 w-full resize-none rounded-lg border border-sand-300 px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
+            className="glass-input mt-1.5 resize-none"
           />
         </div>
       </div>
 
-      <div className="mt-6 space-y-2 border-t border-sand-100 pt-5">
+      <div className="mt-6 space-y-2 rounded-2xl border border-white/60 bg-white/45 p-4 backdrop-blur-xl">
         <div className="flex justify-between text-sm text-desert-800/70">
           <span>
             {tour.price.toLocaleString()} ETB × {guests} {guests === 1 ? 'guest' : 'guests'}
           </span>
           <span>{total.toLocaleString()} ETB</span>
         </div>
-        <div className="flex justify-between text-base font-bold text-desert-900">
+        <div className="flex justify-between border-t border-white/60 pt-2 text-base font-extrabold text-desert-900">
           <span>Total</span>
           <span>{total.toLocaleString()} ETB</span>
         </div>
@@ -149,7 +164,7 @@ export default function BookingForm({ tour }: { tour: Tour }) {
       <button
         type="submit"
         disabled={loading}
-        className="mt-6 w-full rounded-full bg-sand-600 py-3 text-sm font-bold text-white transition hover:bg-sand-700 disabled:opacity-60"
+        className="btn-solid mt-6 w-full disabled:opacity-60"
       >
         {loading ? 'Sending request...' : 'Request booking'}
       </button>
