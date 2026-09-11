@@ -8,29 +8,40 @@ html {
 
 body {
   @apply antialiased text-desert-900;
-  background-color: #f7ecdc;
-  background-image:
-    radial-gradient(1200px 800px at 8% -8%, #ffd9a1 0%, transparent 55%),
-    radial-gradient(1000px 700px at 92% 8%, #e0b079 0%, transparent 55%),
-    radial-gradient(900px 900px at 50% 120%, #b87333 0%, transparent 60%),
-    radial-gradient(600px 500px at 20% 60%, #ffeed0 0%, transparent 60%),
-    linear-gradient(180deg, #fdf3e2 0%, #f0d9b3 40%, #e2b982 100%);
-  background-repeat: no-repeat;
+  background-color: #2a221c;
+  background-image: url('/tours/hero-4.jpg');
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  min-height: 100vh;
 }
 
-/* Desktop: keep background fixed (nice parallax). Mobile: scrolls normally. */
 @media (min-width: 768px) {
   body {
     background-attachment: fixed;
   }
 }
 
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 21, 18, 0.55) 0%,
+    rgba(26, 21, 18, 0.45) 40%,
+    rgba(26, 21, 18, 0.65) 100%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
 /* ---------- GLASS UTILITIES ---------- */
 @layer components {
   .glass {
     position: relative;
-    @apply rounded-3xl border border-white/60 shadow-[0_8px_32px_-8px_rgba(89,54,30,0.25),inset_0_1px_0_0_rgba(255,255,255,0.7)];
+    @apply rounded-3xl border border-white/60 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4),inset_0_1px_0_0_rgba(255,255,255,0.7)];
     background: linear-gradient(
       135deg,
       rgba(255, 255, 255, 0.35) 0%,
@@ -42,11 +53,11 @@ body {
 
   .glass-strong {
     position: relative;
-    @apply rounded-3xl border border-white/70 shadow-[0_10px_40px_-10px_rgba(89,54,30,0.3),inset_0_1px_0_0_rgba(255,255,255,0.85)];
+    @apply rounded-3xl border border-white/70 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.85)];
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.62) 0%,
-      rgba(255, 255, 255, 0.38) 100%
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(255, 255, 255, 0.55) 100%
     );
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
@@ -87,8 +98,8 @@ body {
     @apply w-full rounded-xl border border-white/70 px-3.5 py-3 text-base text-desert-900 outline-none transition placeholder:text-desert-800/40 sm:py-2.5 sm:text-sm;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.55) 0%,
-      rgba(255, 255, 255, 0.3) 100%
+      rgba(255, 255, 255, 0.75) 0%,
+      rgba(255, 255, 255, 0.55) 100%
     );
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -98,8 +109,8 @@ body {
     @apply border-sand-400 ring-2 ring-sand-200/60;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.85) 0%,
-      rgba(255, 255, 255, 0.6) 100%
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.75) 100%
     );
   }
 
@@ -137,11 +148,11 @@ body {
   }
 
   .section-title {
-    @apply text-2xl font-extrabold tracking-tight text-desert-900 sm:text-3xl lg:text-4xl;
+    @apply text-2xl font-extrabold tracking-tight text-white drop-shadow-lg sm:text-3xl lg:text-4xl;
   }
 
   .eyebrow {
-    @apply text-[11px] font-bold uppercase tracking-[0.2em] text-sand-700 sm:text-xs;
+    @apply text-[11px] font-bold uppercase tracking-[0.2em] text-sand-300 drop-shadow sm:text-xs;
   }
 }
 
@@ -150,7 +161,7 @@ body {
   color: #1a1512;
 }
 
-/* ---------- MARQUEE (desktop only animation) ---------- */
+/* ---------- MARQUEE ---------- */
 @keyframes marquee-scroll {
   0% {
     transform: translate3d(0, 0, 0);
@@ -172,7 +183,6 @@ body {
   transform: translate3d(0, 0, 0);
 }
 
-/* Desktop: infinite auto-scroll */
 @media (min-width: 768px) {
   .marquee-mask {
     -webkit-mask-image: linear-gradient(
@@ -204,7 +214,6 @@ body {
   }
 }
 
-/* Mobile: native horizontal swipe with snap — no animation, no lag */
 @media (max-width: 767px) {
   .marquee-mask {
     overflow-x: auto;
@@ -229,13 +238,11 @@ body {
     scroll-snap-align: center;
   }
 
-  /* Hide the duplicate set on mobile — no need for a seamless loop */
   .marquee-track > div[aria-hidden='true'] {
     display: none;
   }
 }
 
-/* Lighter glass inside marquee cards (both platforms) */
 .marquee-track article {
   backdrop-filter: blur(8px) saturate(140%) !important;
   -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
