@@ -27,14 +27,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={inter.variable}>
       <body className="flex min-h-screen flex-col font-sans">
-        {/* Desktop background — hidden on mobile */}
-        <div
+        {/* Desktop background */}
+        <img
           aria-hidden
-          className="pointer-events-none fixed inset-0 -z-20 hidden bg-cover bg-center bg-no-repeat md:block"
-          style={{ backgroundImage: "url('/tours/hero-4.jpg')" }}
+          src="/tours/hero-4.jpg"
+          alt=""
+          className="pointer-events-none fixed inset-0 -z-20 hidden h-full w-full object-cover md:block"
         />
 
-        {/* Mobile background — hidden on desktop. Uses <img> for reliability. */}
+        {/* Mobile background (portrait) */}
         <img
           aria-hidden
           src="/tours/hero-4-mobile.jpg"
@@ -48,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           className="pointer-events-none fixed inset-0 -z-10"
           style={{
             background:
-              'linear-gradient(180deg, rgba(26,21,18,0.55) 0%, rgba(26,21,18,0.45) 40%, rgba(26,21,18,0.65) 100%)',
+              'linear-gradient(180deg, rgba(26,21,18,0.5) 0%, rgba(26,21,18,0.4) 40%, rgba(26,21,18,0.6) 100%)',
           }}
         />
 
