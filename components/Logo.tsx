@@ -40,13 +40,14 @@ export default function Logo({ light = false }: { light?: boolean }) {
       </svg>
 
       <span
-        className={`text-[16px] font-black tracking-tight transition-colors sm:text-[18px] ${
+        className={`text-[16px] font-black tracking-tight ${
           light ? 'text-white' : 'text-amber-300'
-        }`}
+        } sm:text-[18px]`}
         style={{
           fontFamily: 'ui-serif, Georgia, "Times New Roman", serif',
           letterSpacing: '-0.02em',
-          textShadow: '0 2px 6px rgba(0,0,0,0.55), 0 0 20px rgba(251,191,36,0.25)',
+          textShadow:
+            '0 2px 6px rgba(0,0,0,0.55), 0 0 20px rgba(251,191,36,0.25)',
         }}
       >
         Ethio Connect
