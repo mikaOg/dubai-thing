@@ -12,7 +12,7 @@ body {
   min-height: 100vh;
 }
 
-/* Desktop / tablet background photo */
+/* Background photo — desktop */
 body::after {
   content: '';
   position: fixed;
@@ -25,7 +25,7 @@ body::after {
   pointer-events: none;
 }
 
-/* Overlay for text contrast */
+/* Overlay */
 body::before {
   content: '';
   position: fixed;
@@ -254,19 +254,19 @@ body::before {
 }
 
 /* ============================================================
-   MOBILE OVERRIDES — portrait photo, sharp
-   Desktop completely unchanged.
+   MOBILE — portrait photo, iOS-safe
    ============================================================ */
 @media (max-width: 767px) {
-  /* 1. Mobile uses its own portrait high-res image */
+  /* Mobile portrait background — using <img> element via CSS content
+     is unreliable. Use the pseudo but WITHOUT background-attachment. */
   body::after {
     background-image: url('/tours/hero-4-mobile.jpg') !important;
     background-size: cover !important;
-    background-position: center top !important;
-    background-attachment: fixed !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
   }
 
-  /* 2. Lighter overlay on mobile */
   body::before {
     background: linear-gradient(
       180deg,
@@ -276,7 +276,6 @@ body::before {
     ) !important;
   }
 
-  /* 3. Kill blur for smooth rendering */
   *,
   *::before,
   *::after {
@@ -284,12 +283,10 @@ body::before {
     -webkit-backdrop-filter: none !important;
   }
 
-  /* 4. Slight scale down for comfort */
   html {
     font-size: 14px;
   }
 
-  /* 5. Glass → clean light solid cards */
   .glass,
   .glass-strong {
     background: rgba(255, 255, 255, 0.94) !important;
@@ -310,7 +307,6 @@ body::before {
     background-color: rgba(255, 255, 255, 0.94) !important;
   }
 
-  /* 6. Header → light solid */
   header > div {
     background: rgba(255, 255, 255, 0.95) !important;
     border-color: rgba(255, 255, 255, 0.7) !important;
@@ -318,7 +314,6 @@ body::before {
     box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.2) !important;
   }
 
-  /* 7. Inputs — solid white, no iOS zoom */
   .glass-input {
     background: #ffffff !important;
     color: #1a1512 !important;
@@ -329,7 +324,6 @@ body::before {
     box-shadow: none !important;
   }
 
-  /* 8. Buttons — tighter */
   .btn-solid,
   .btn-glass {
     padding: 0.5rem 1rem !important;
@@ -344,7 +338,6 @@ body::before {
     box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.2) !important;
   }
 
-  /* 9. Headings — smaller */
   .section-title {
     font-size: 1.2rem !important;
     line-height: 1.25 !important;
@@ -354,14 +347,12 @@ body::before {
     font-size: 0.6rem !important;
   }
 
-  /* 10. Tour cards — dark, compact, still animated */
   .marquee-track article {
     background-color: rgba(22, 18, 15, 0.92) !important;
     border-color: rgba(255, 255, 255, 0.15) !important;
     border-radius: 1rem !important;
   }
 
-  /* 11. Shorter section spacing */
   section.py-12 {
     padding-top: 1.75rem !important;
     padding-bottom: 1.75rem !important;
