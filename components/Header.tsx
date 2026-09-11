@@ -17,7 +17,6 @@ const links = [
 export default function Header() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const supabase = createClient();
@@ -37,10 +36,6 @@ export default function Header() {
     return () => subscription.unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -62,6 +57,7 @@ export default function Header() {
         <div className="relative flex h-14 items-center justify-between px-3 sm:h-16 sm:px-6">
           <Logo />
 
+          {/* Desktop nav — hidden on mobile */}
           <nav className="hidden items-center gap-1 md:flex">
             {links.map((l) => {
               const active =
@@ -118,76 +114,64 @@ export default function Header() {
             )}
           </div>
 
-          <button
-            onClick={() => setOpen((v) => !v)}
-            className="rounded-full border border-white/30 bg-white/10 p-2 text-white md:hidden"
-            aria-label="Toggle menu"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              {open ? (
-                <path strokeLinecap="round" d="M6 6l12 12M6 18L18 6" />
-              ) : (
-                <path strokeLinecap="round" d="M4 7h16M4 12h16M4 17h16" />
-              )}
-            </svg>
-          </button>
+          {/* Mobile auth buttons — visible on phone only */}
+          <div className="flex items-center gap-1.5 md:hidden">
+            {loading ? (
+              <div className="h-8 w-20 animate-pulse rounded-full bg-white/10" />
+            ) : user ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-[11px] font-bold text-white"
+                >
+                  Bookings
+                </Link>
+                <button
+                  onClick={handleSignOut}
+                  className="rounded-full bg-gradient-to-br from-amber-400 to-amber-600 px-3 py-1.5 text-[11px] font-bold text-desert-900"
+                >
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/auth/sign-in"
+                  className="rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-[11px] font-bold text-white"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  href="/auth/sign-up"
+                  className="rounded-full bg-gradient-to-br from-amber-400 to-amber-600 px-3 py-1.5 text-[11px] font-bold text-desert-900"
+                >
+                  Sign up
+                </Link>
+              </>
+            )}
+          </div>
         </div>
 
-        {open && (
-          <div className="relative border-t border-white/15 md:hidden">
-            <div className="space-y-0.5 px-2.5 py-2.5">
-              {links.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-white/90 transition hover:bg-white/10"
-                >
-                  {l.label}
-                </Link>
-              ))}
-
-              <div className="mt-2 space-y-1.5 border-t border-white/15 pt-2.5">
-                {user ? (
-                  <>
-                    <Link
-                      href="/dashboard"
-                      className="block rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-center text-sm font-semibold text-white"
-                    >
-                      My Bookings
-                    </Link>
-                    <button
-                      onClick={handleSignOut}
-                      className="block w-full rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 px-3 py-2 text-center text-sm font-semibold text-desert-900"
-                    >
-                      Sign out
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      href="/auth/sign-in"
-                      className="block rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-center text-sm font-semibold text-white"
-                    >
-                      Sign in
-                    </Link>
-                    <Link
-                      href="/auth/sign-up"
-                      className="block rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 px-3 py-2 text-center text-sm font-semibold text-desert-900"
-                    >
-                      Create account
-                    </Link>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Mobile nav row — always visible on phone */}
+        <nav className="relative flex items-center gap-1 overflow-x-auto border-t border-white/15 px-2.5 py-2 md:hidden">
+          {links.map((l) => {
+            const active =
+              l.href === '/' ? pathname === '/' : pathname.startsWith(l.href);
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-bold transition ${
+                  active
+                    ? 'bg-white/15 text-amber-300'
+                    : 'text-white/90 hover:bg-white/10'
+                }`}
+              >
+                {l.label}
+              </Link>
+            );
+          })}
+        </nav>
       </div>
     </header>
   );
