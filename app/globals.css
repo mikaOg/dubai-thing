@@ -7,5 +7,56 @@ html {
 }
 
 body {
-  @apply bg-white text-desert-900 antialiased;
+  @apply antialiased text-desert-900;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #f9ecd8 0%, transparent 60%),
+    radial-gradient(900px 500px at 90% 10%, #f1d5ab 0%, transparent 55%),
+    radial-gradient(1000px 700px at 50% 120%, #fdf8f1 0%, transparent 60%),
+    linear-gradient(180deg, #fffdf9 0%, #fdf8f1 100%);
+  background-attachment: fixed;
+}
+
+/* ---------- GLASS UTILITIES ---------- */
+@layer components {
+  .glass {
+    @apply rounded-2xl border border-white/50 bg-white/55 shadow-[0_8px_40px_-12px_rgba(89,54,30,0.18)] backdrop-blur-2xl;
+  }
+
+  .glass-strong {
+    @apply rounded-2xl border border-white/60 bg-white/75 shadow-[0_10px_50px_-15px_rgba(89,54,30,0.25)] backdrop-blur-2xl;
+  }
+
+  .glass-dark {
+    @apply rounded-2xl border border-white/15 bg-white/5 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.4)] backdrop-blur-2xl;
+  }
+
+  .glass-input {
+    @apply w-full rounded-xl border border-white/60 bg-white/60 px-3.5 py-2.5 text-sm text-desert-900 outline-none backdrop-blur-xl transition placeholder:text-desert-800/40 focus:border-sand-400 focus:bg-white/85 focus:ring-2 focus:ring-sand-200/70;
+  }
+
+  .glass-pill {
+    @apply rounded-full border border-white/50 bg-white/60 backdrop-blur-xl;
+  }
+
+  .btn-glass {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/30 px-6 py-3 text-sm font-bold text-white backdrop-blur-xl transition hover:bg-white/45 active:scale-[0.98];
+  }
+
+  .btn-solid {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-sand-500 to-sand-700 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sand-900/25 transition hover:from-sand-600 hover:to-sand-800 active:scale-[0.98];
+  }
+
+  .section-title {
+    @apply text-3xl font-extrabold tracking-tight text-desert-900 sm:text-4xl;
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.2em] text-sand-600;
+  }
+}
+
+/* ---------- Nice scrollbar (subtle) ---------- */
+::selection {
+  background: #e6b877;
+  color: #1a1512;
 }
