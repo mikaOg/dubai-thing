@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 export default function ToursPage() {
   return (
     <>
-      <section className="bg-desert-900 py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="px-3 pt-4 sm:px-4">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-desert-900 to-black px-6 py-14 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] sm:px-10 sm:py-16">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-sand-400">
             All departures
           </p>
@@ -25,8 +25,8 @@ export default function ToursPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {tours.map((t) => (
             <TourCard key={t.slug} tour={t} />
           ))}
