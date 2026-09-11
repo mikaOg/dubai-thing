@@ -51,9 +51,10 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 px-2 pt-2 sm:px-4 sm:pt-4">
       <div
-        className="relative mx-auto max-w-7xl overflow-hidden rounded-xl border border-white/25 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.35)] sm:rounded-2xl"
+        className="relative mx-auto max-w-7xl overflow-hidden rounded-xl border border-white/20 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.5)] sm:rounded-2xl"
         style={{
-          background: 'rgba(255, 255, 255, 0.06)',
+          background:
+            'linear-gradient(135deg, rgba(26,21,18,0.62) 0%, rgba(26,21,18,0.42) 100%)',
           backdropFilter: 'blur(40px) saturate(200%)',
           WebkitBackdropFilter: 'blur(40px) saturate(200%)',
         }}
@@ -74,7 +75,6 @@ export default function Header() {
                       ? 'bg-white/15 text-amber-300'
                       : 'text-white/90 hover:bg-white/10 hover:text-amber-200'
                   }`}
-                  style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}
                 >
                   {l.label}
                 </Link>
@@ -90,7 +90,6 @@ export default function Header() {
                 <Link
                   href="/dashboard"
                   className="rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/20"
-                  style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}
                 >
                   My Bookings
                 </Link>
@@ -106,7 +105,6 @@ export default function Header() {
                 <Link
                   href="/auth/sign-in"
                   className="rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/20"
-                  style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}
                 >
                   Sign in
                 </Link>
@@ -149,7 +147,6 @@ export default function Header() {
                   key={l.href}
                   href={l.href}
                   className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-white/90 transition hover:bg-white/10"
-                  style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}
                 >
                   {l.label}
                 </Link>
@@ -161,7 +158,6 @@ export default function Header() {
                     <Link
                       href="/dashboard"
                       className="block rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-center text-sm font-semibold text-white"
-                      style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}
                     >
                       My Bookings
                     </Link>
@@ -177,7 +173,6 @@ export default function Header() {
                     <Link
                       href="/auth/sign-in"
                       className="block rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-center text-sm font-semibold text-white"
-                      style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}
                     >
                       Sign in
                     </Link>
