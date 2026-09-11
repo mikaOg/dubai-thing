@@ -56,9 +56,9 @@ export default function HomePage() {
 
   return (
     <>
-      {/* HERO with slideshow */}
+      {/* HERO */}
       <section className="px-3 pt-3 sm:px-4 sm:pt-4">
-        <div className="relative isolate mx-auto max-w-7xl overflow-hidden rounded-3xl">
+        <div className="relative isolate mx-auto min-h-[480px] max-w-7xl overflow-hidden rounded-3xl sm:min-h-[560px]">
           {[
             '/tours/hero.jpg',
             '/tours/hero-2.jpg',
@@ -78,32 +78,32 @@ export default function HomePage() {
           ))}
           <div className="absolute inset-0 bg-gradient-to-br from-desert-900/80 via-desert-900/55 to-sand-900/40" />
 
-          <div className="relative px-6 py-24 sm:px-10 sm:py-32 lg:px-14 lg:py-40">
+          <div className="relative flex min-h-[480px] flex-col justify-center px-5 py-14 sm:min-h-[560px] sm:px-10 sm:py-24 lg:px-14 lg:py-32">
             <div className="max-w-3xl">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-sand-100 backdrop-blur-xl">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-sand-100 backdrop-blur-xl sm:text-xs">
                 <span className="h-1.5 w-1.5 rounded-full bg-sand-400" />
                 Afar Region · Ethiopia
               </span>
 
-              <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-white drop-shadow-2xl sm:text-5xl lg:text-6xl">
+              <h1 className="mt-5 text-3xl font-extrabold leading-[1.1] tracking-tight text-white drop-shadow-2xl sm:mt-6 sm:text-5xl lg:text-6xl">
                 Walk into the hottest,{' '}
                 <br className="hidden sm:block" />
                 most beautiful place on Earth.
               </h1>
 
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-sand-50/90 drop-shadow-lg sm:text-lg">
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-sand-50/90 drop-shadow-lg sm:mt-6 sm:text-lg">
                 Ethio Connect to Desert runs small-group expeditions to the Danakil
                 Depression, Erta Ale volcano and the Afar salt flats — guided by the
                 people who call this land home.
               </p>
 
-              <div className="mt-9 flex flex-wrap gap-3">
-                <Link href="/tours" className="btn-solid px-8 py-3.5 text-base">
+              <div className="mt-7 flex flex-wrap gap-3 sm:mt-9">
+                <Link href="/tours" className="btn-solid px-6 py-3 text-sm sm:px-8 sm:py-3.5 sm:text-base">
                   Explore tours
                 </Link>
                 <Link
                   href="/auth/sign-up"
-                  className="btn-glass px-8 py-3.5 text-base"
+                  className="btn-glass px-6 py-3 text-sm sm:px-8 sm:py-3.5 sm:text-base"
                 >
                   Create free account
                 </Link>
@@ -115,12 +115,14 @@ export default function HomePage() {
 
       {/* STATS */}
       <section className="px-3 pt-4 sm:px-4">
-        <div className="mx-auto max-w-7xl rounded-3xl border border-white/60 bg-white/55 px-6 py-8 shadow-[0_8px_40px_-15px_rgba(89,54,30,0.2)] backdrop-blur-2xl sm:px-10">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+        <div className="mx-auto max-w-7xl rounded-3xl border border-white/60 bg-white/55 px-5 py-6 shadow-[0_8px_40px_-15px_rgba(89,54,30,0.2)] backdrop-blur-2xl sm:px-10 sm:py-8">
+          <div className="grid grid-cols-2 gap-5 sm:gap-6 md:grid-cols-4">
             {stats.map((s) => (
               <div key={s.label} className="text-center md:text-left">
-                <p className="text-3xl font-extrabold text-desert-900">{s.value}</p>
-                <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-sand-700">
+                <p className="text-2xl font-extrabold text-desert-900 sm:text-3xl">
+                  {s.value}
+                </p>
+                <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-sand-700 sm:text-[11px]">
                   {s.label}
                 </p>
               </div>
@@ -129,13 +131,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED — slow, smooth marquee */}
-      <section className="py-16 sm:py-20">
+      {/* FEATURED */}
+      <section className="py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="eyebrow">Featured departures</p>
-              <h2 className="section-title mt-3">Our most-booked desert tours</h2>
+              <h2 className="section-title mt-2 sm:mt-3">
+                Our most-booked desert tours
+              </h2>
             </div>
             <Link
               href="/tours"
@@ -146,10 +150,13 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="marquee-mask mt-12">
+        <div className="marquee-mask mt-8 sm:mt-12">
           <div className="marquee-track">
             {featured.map((t) => (
-              <div key={`a-${t.slug}`} className="w-[300px] shrink-0 sm:w-[340px]">
+              <div
+                key={`a-${t.slug}`}
+                className="w-[280px] shrink-0 sm:w-[340px]"
+              >
                 <TourCard tour={t} />
               </div>
             ))}
@@ -157,7 +164,7 @@ export default function HomePage() {
               <div
                 key={`b-${t.slug}`}
                 aria-hidden="true"
-                className="w-[300px] shrink-0 sm:w-[340px]"
+                className="w-[280px] shrink-0 sm:w-[340px]"
               >
                 <TourCard tour={t} />
               </div>
@@ -167,28 +174,32 @@ export default function HomePage() {
       </section>
 
       {/* WHY US */}
-      <section className="px-3 py-6 sm:px-4">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-desert-900 to-black px-6 py-16 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] sm:px-10 sm:py-20">
+      <section className="px-3 py-4 sm:px-4 sm:py-6">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-desert-900 to-black px-5 py-12 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] sm:px-10 sm:py-20">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-sand-400">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-sand-400 sm:text-xs">
               Why travel with us
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-white sm:text-4xl">
               Built by Ethiopians, for people who want the real thing.
             </h2>
           </div>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-4 sm:mt-14 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {reasons.map((r) => (
               <div
                 key={r.title}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition hover:bg-white/10"
+                className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl transition hover:bg-white/10 sm:p-5"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-sand-500/20 text-lg">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-sand-500/20 text-base sm:h-11 sm:w-11 sm:text-lg">
                   {r.icon}
                 </span>
-                <h3 className="mt-4 text-base font-bold text-white">{r.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-sand-100/70">{r.body}</p>
+                <h3 className="mt-3 text-sm font-bold text-white sm:mt-4 sm:text-base">
+                  {r.title}
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-sand-100/70 sm:text-sm">
+                  {r.body}
+                </p>
               </div>
             ))}
           </div>
@@ -196,23 +207,23 @@ export default function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-20 lg:px-8">
         <div className="text-center">
           <p className="eyebrow">Traveller stories</p>
-          <h2 className="section-title mt-3">What our guests say</h2>
+          <h2 className="section-title mt-2 sm:mt-3">What our guests say</h2>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
           {testimonials.map((t) => (
             <figure
               key={t.name}
-              className="rounded-3xl border border-white/60 bg-white/60 p-7 shadow-[0_8px_40px_-15px_rgba(89,54,30,0.2)] backdrop-blur-2xl"
+              className="rounded-3xl border border-white/60 bg-white/60 p-5 shadow-[0_8px_40px_-15px_rgba(89,54,30,0.2)] backdrop-blur-2xl sm:p-7"
             >
               <div className="text-sand-500">★★★★★</div>
-              <blockquote className="mt-4 text-sm leading-relaxed text-desert-800/80">
+              <blockquote className="mt-3 text-sm leading-relaxed text-desert-800/80 sm:mt-4">
                 &ldquo;{t.text}&rdquo;
               </blockquote>
-              <figcaption className="mt-6 flex items-center gap-3 border-t border-white/60 pt-4">
+              <figcaption className="mt-5 flex items-center gap-3 border-t border-white/60 pt-4 sm:mt-6">
                 <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-sand-400 to-sand-600 text-sm font-bold text-white">
                   {t.name.charAt(0)}
                 </div>
@@ -228,22 +239,22 @@ export default function HomePage() {
 
       {/* CTA */}
       <section className="px-3 pb-4 sm:px-4">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-sand-500 via-sand-600 to-sand-700 px-6 py-16 text-center shadow-[0_20px_60px_-20px_rgba(168,101,39,0.6)] sm:px-10 sm:py-20">
-          <h2 className="mx-auto max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-sand-500 via-sand-600 to-sand-700 px-5 py-12 text-center shadow-[0_20px_60px_-20px_rgba(168,101,39,0.6)] sm:px-10 sm:py-20">
+          <h2 className="mx-auto max-w-2xl text-2xl font-extrabold tracking-tight text-white sm:text-4xl">
             Ready to see the Danakil for yourself?
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sand-50/95">
+          <p className="mx-auto mt-3 max-w-xl text-sm text-sand-50/95 sm:mt-4 sm:text-base">
             Create a free account, pick your dates, and we&apos;ll confirm your
             departure within 24 hours.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <div className="mt-6 flex flex-wrap justify-center gap-3 sm:mt-8">
             <Link
               href="/auth/sign-up"
-              className="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-sand-700 shadow-lg transition hover:bg-sand-50"
+              className="rounded-full bg-white px-6 py-3 text-sm font-bold text-sand-700 shadow-lg transition hover:bg-sand-50 sm:px-8 sm:py-3.5"
             >
               Create free account
             </Link>
-            <Link href="/tours" className="btn-glass px-8 py-3.5">
+            <Link href="/tours" className="btn-glass px-6 py-3 text-sm sm:px-8 sm:py-3.5">
               Browse tours
             </Link>
           </div>
