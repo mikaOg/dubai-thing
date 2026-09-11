@@ -56,17 +56,26 @@ export default function HomePage() {
 
   return (
     <>
-      {/* HERO */}
+      {/* HERO with slideshow */}
       <section className="px-3 pt-3 sm:px-4 sm:pt-4">
         <div className="relative isolate mx-auto max-w-7xl overflow-hidden rounded-3xl">
-          <Image
-            src="/tours/hero.jpg"
-            alt="4x4 expedition in the Ethiopian desert"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
+          {[
+            '/tours/hero.jpg',
+            '/tours/hero-2.jpg',
+            '/tours/hero-3.jpg',
+            '/tours/hero-4.jpg',
+          ].map((src, i) => (
+            <Image
+              key={src}
+              src={src}
+              alt="Ethiopian desert expedition"
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              className="hero-slide-img object-cover"
+              style={{ animationDelay: `${i * 2}s` }}
+            />
+          ))}
           <div className="absolute inset-0 bg-gradient-to-br from-desert-900/80 via-desert-900/55 to-sand-900/40" />
 
           <div className="relative px-6 py-24 sm:px-10 sm:py-32 lg:px-14 lg:py-40">
