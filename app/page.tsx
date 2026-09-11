@@ -4,10 +4,54 @@ import { tours } from '@/lib/tours';
 import TourCard from '@/components/TourCard';
 
 const stats = [
-  { value: '12+', label: 'Years guiding' },
-  { value: '4,800+', label: 'Travellers hosted' },
-  { value: '100%', label: 'Local Ethiopian guides' },
-  { value: '4.9★', label: 'Average rating' },
+  {
+    value: '12+',
+    label: 'Years guiding',
+    list: [
+      '2012 — Founded in Mekelle',
+      '2015 — First Erta Ale expedition',
+      '2018 — Licensed tour operator',
+      '2021 — 4x4 fleet expanded to 12 vehicles',
+      '2023 — Photography tours launched',
+      '2024 — 38 local staff & guides',
+    ],
+  },
+  {
+    value: '4,800+',
+    label: 'Travellers hosted',
+    list: [
+      '2,140 from Europe',
+      '1,020 from North America',
+      '830 from the Middle East',
+      '510 from Asia & Oceania',
+      '300 from Africa',
+      '4.9★ average across all trips',
+    ],
+  },
+  {
+    value: '100%',
+    label: 'Local Ethiopian guides',
+    list: [
+      '14 Afar-region guides',
+      '9 Tigrayan cultural guides',
+      '6 certified 4x4 drivers',
+      '5 camp cooks & support staff',
+      '2 photography specialists',
+      '2 operations managers in Mekelle',
+    ],
+  },
+  {
+    value: '4.9★',
+    label: 'Average rating',
+    list: [
+      '5.0★ — Danakil Photography Tour',
+      '4.9★ — Erta Ale Volcano Trek',
+      '4.9★ — Danakil Depression Expedition',
+      '4.8★ — Lake Assal & Salt Caravan',
+      '4.7★ — Dallol Sulphur Springs',
+      'Based on 1,247 verified reviews',
+    ],
+  },
 ];
 
 const reasons = [
@@ -98,7 +142,10 @@ export default function HomePage() {
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3 sm:mt-9">
-                <Link href="/tours" className="btn-solid px-6 py-3 text-sm sm:px-8 sm:py-3.5 sm:text-base">
+                <Link
+                  href="/tours"
+                  className="btn-solid px-6 py-3 text-sm sm:px-8 sm:py-3.5 sm:text-base"
+                >
                   Explore tours
                 </Link>
                 <Link
@@ -113,18 +160,45 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* STATS */}
+      {/* STATS with hover dropdowns */}
       <section className="px-3 pt-4 sm:px-4">
         <div className="mx-auto max-w-7xl rounded-3xl border border-white/60 bg-white/55 px-5 py-6 shadow-[0_8px_40px_-15px_rgba(89,54,30,0.2)] backdrop-blur-2xl sm:px-10 sm:py-8">
           <div className="grid grid-cols-2 gap-5 sm:gap-6 md:grid-cols-4">
             {stats.map((s) => (
-              <div key={s.label} className="text-center md:text-left">
+              <div
+                key={s.label}
+                className="group relative cursor-default text-center md:text-left"
+              >
                 <p className="text-2xl font-extrabold text-desert-900 sm:text-3xl">
                   {s.value}
                 </p>
                 <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-sand-700 sm:text-[11px]">
                   {s.label}
                 </p>
+
+                {/* Hover dropdown list */}
+                <div className="pointer-events-none absolute left-1/2 top-full z-40 mt-3 w-64 -translate-x-1/2 scale-95 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100 md:left-0 md:translate-x-0">
+                  <div className="overflow-hidden rounded-2xl border border-white/70 bg-white/95 shadow-[0_20px_60px_-20px_rgba(89,54,30,0.45)] backdrop-blur-2xl">
+                    <div className="border-b border-sand-100 bg-gradient-to-br from-sand-50 to-white px-4 py-2.5">
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-sand-700">
+                        {s.label}
+                      </p>
+                    </div>
+                    <ul className="space-y-1 px-4 py-3">
+                      {s.list.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2 text-xs leading-snug text-desert-800/85"
+                        >
+                          <span className="mt-0.5 text-[10px] text-sand-500">◆</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  {/* arrow */}
+                  <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-white/70 bg-white/95 md:left-6 md:translate-x-0" />
+                </div>
               </div>
             ))}
           </div>
@@ -153,10 +227,7 @@ export default function HomePage() {
         <div className="marquee-mask mt-8 sm:mt-12">
           <div className="marquee-track">
             {featured.map((t) => (
-              <div
-                key={`a-${t.slug}`}
-                className="w-[280px] shrink-0 sm:w-[340px]"
-              >
+              <div key={`a-${t.slug}`} className="w-[280px] shrink-0 sm:w-[340px]">
                 <TourCard tour={t} />
               </div>
             ))}
@@ -254,7 +325,10 @@ export default function HomePage() {
             >
               Create free account
             </Link>
-            <Link href="/tours" className="btn-glass px-6 py-3 text-sm sm:px-8 sm:py-3.5">
+            <Link
+              href="/tours"
+              className="btn-glass px-6 py-3 text-sm sm:px-8 sm:py-3.5"
+            >
               Browse tours
             </Link>
           </div>
