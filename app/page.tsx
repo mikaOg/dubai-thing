@@ -55,12 +55,13 @@ export default function HomePage() {
       <section className="relative isolate overflow-hidden">
         <Image
           src="/tours/hero.jpg"
-          alt="Ethiopian desert at sunset"
+          alt="4x4 expedition in the Ethiopian desert"
           fill
           priority
+          sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-desert-900/90 via-desert-900/70 to-sand-900/60" />
+        <div className="absolute inset-0 bg-gradient-to-br from-desert-900/85 via-desert-900/60 to-sand-900/50" />
 
         <div className="relative mx-auto max-w-7xl px-4 py-28 sm:px-6 sm:py-36 lg:px-8 lg:py-44">
           <div className="max-w-3xl">
@@ -69,12 +70,12 @@ export default function HomePage() {
               Afar Region · Ethiopia
             </span>
 
-            <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-white drop-shadow-lg sm:text-5xl lg:text-6xl">
               Walk into the hottest, <br className="hidden sm:block" />
               most beautiful place on Earth.
             </h1>
 
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-sand-100/85">
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-sand-50 drop-shadow-md">
               Ethio Connect to Desert runs small-group expeditions to the Danakil
               Depression, Erta Ale volcano and the Afar salt flats — guided by the
               people who call this land home.
