@@ -12,34 +12,6 @@ body {
   min-height: 100vh;
 }
 
-/* Background photo — desktop */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url('/tours/hero-4.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -2;
-  pointer-events: none;
-}
-
-/* Overlay */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(26, 21, 18, 0.55) 0%,
-    rgba(26, 21, 18, 0.45) 40%,
-    rgba(26, 21, 18, 0.65) 100%
-  );
-  pointer-events: none;
-  z-index: -1;
-}
-
 /* ---------- GLASS UTILITIES ---------- */
 @layer components {
   .glass {
@@ -254,28 +226,9 @@ body::before {
 }
 
 /* ============================================================
-   MOBILE — portrait photo, iOS-safe
+   MOBILE OVERRIDES
    ============================================================ */
 @media (max-width: 767px) {
-  /* Mobile portrait background — using <img> element via CSS content
-     is unreliable. Use the pseudo but WITHOUT background-attachment. */
-  body::after {
-    background-image: url('/tours/hero-4-mobile.jpg') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-attachment: scroll !important;
-  }
-
-  body::before {
-    background: linear-gradient(
-      180deg,
-      rgba(26, 21, 18, 0.42) 0%,
-      rgba(26, 21, 18, 0.32) 40%,
-      rgba(26, 21, 18, 0.5) 100%
-    ) !important;
-  }
-
   *,
   *::before,
   *::after {
