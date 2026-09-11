@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -9,10 +8,10 @@ import { createClient } from '@/lib/supabase/client';
 import type { User } from '@supabase/supabase-js';
 
 const links = [
-  { href: '/', label: 'Home', icon: null as string | null },
-  { href: '/tours', label: 'Tours', icon: '/tours.png' },
-  { href: '/about', label: 'About', icon: '/about.png' },
-  { href: '/contact', label: 'Contact', icon: '/contact.png' },
+  { href: '/', label: 'Home' },
+  { href: '/tours', label: 'Tours' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export default function Header() {
@@ -65,24 +64,13 @@ export default function Header() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                     active
                       ? 'bg-white/50 text-sand-700 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.7)] backdrop-blur-xl'
                       : 'text-desert-800 hover:bg-white/35 hover:text-sand-700'
                   }`}
                 >
-                  {l.icon ? (
-                    <Image
-                      src={l.icon}
-                      alt=""
-                      width={18}
-                      height={18}
-                      className="h-[18px] w-[18px] object-contain"
-                    />
-                  ) : (
-                    <span className="text-base leading-none">🏠</span>
-                  )}
-                  <span>{l.label}</span>
+                  {l.label}
                 </Link>
               );
             })}
@@ -95,44 +83,40 @@ export default function Header() {
               <>
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-1.5 rounded-full border border-white/60 bg-white/30 px-5 py-2 text-sm font-semibold text-desert-800 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.7)] backdrop-blur-xl transition hover:bg-white/55"
+                  className="rounded-full border border-white/60 bg-white/30 px-5 py-2 text-sm font-semibold text-desert-800 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.7)] backdrop-blur-xl transition hover:bg-white/55"
                 >
-                  <span className="text-base leading-none">🎒</span>
-                  <span>My Bookings</span>
+                  My Bookings
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="flex items-center gap-1.5 rounded-full px-5 py-2 text-sm font-semibold text-white transition hover:brightness-110"
+                  className="rounded-full px-5 py-2 text-sm font-semibold text-white transition hover:brightness-110"
                   style={{
                     background: 'linear-gradient(135deg, #3d3229 0%, #1a1512 100%)',
                     boxShadow:
                       'inset 0 1px 0 0 rgba(255,255,255,0.15), 0 8px 20px -8px rgba(0,0,0,0.5)',
                   }}
                 >
-                  <span className="text-base leading-none">🚪</span>
-                  <span>Sign out</span>
+                  Sign out
                 </button>
               </>
             ) : (
               <>
                 <Link
                   href="/auth/sign-in"
-                  className="flex items-center gap-1.5 rounded-full border border-white/60 bg-white/30 px-5 py-2 text-sm font-semibold text-desert-800 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.7)] backdrop-blur-xl transition hover:bg-white/55"
+                  className="rounded-full border border-white/60 bg-white/30 px-5 py-2 text-sm font-semibold text-desert-800 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.7)] backdrop-blur-xl transition hover:bg-white/55"
                 >
-                  <span className="text-base leading-none">🔑</span>
-                  <span>Sign in</span>
+                  Sign in
                 </Link>
                 <Link
                   href="/auth/sign-up"
-                  className="flex items-center gap-1.5 rounded-full px-5 py-2 text-sm font-semibold text-white transition hover:brightness-110"
+                  className="rounded-full px-5 py-2 text-sm font-semibold text-white transition hover:brightness-110"
                   style={{
                     background: 'linear-gradient(135deg, #db9c4d 0%, #a86527 100%)',
                     boxShadow:
                       'inset 0 1px 0 0 rgba(255,255,255,0.35), 0 8px 24px -8px rgba(168,101,39,0.6)',
                   }}
                 >
-                  <span className="text-base leading-none">✨</span>
-                  <span>Create account</span>
+                  Create account
                 </Link>
               </>
             )}
@@ -162,74 +146,51 @@ export default function Header() {
         {open && (
           <div className="relative border-t border-white/40 md:hidden">
             <div className="space-y-0.5 px-2.5 py-2.5">
-              {links.map((l) => {
-                const active =
-                  l.href === '/' ? pathname === '/' : pathname.startsWith(l.href);
-                return (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    className={`flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-semibold transition ${
-                      active
-                        ? 'bg-white/60 text-sand-700'
-                        : 'text-desert-800 hover:bg-white/45'
-                    }`}
-                  >
-                    {l.icon ? (
-                      <Image
-                        src={l.icon}
-                        alt=""
-                        width={18}
-                        height={18}
-                        className="h-[18px] w-[18px] object-contain"
-                      />
-                    ) : (
-                      <span className="text-base leading-none">🏠</span>
-                    )}
-                    <span>{l.label}</span>
-                  </Link>
-                );
-              })}
+              {links.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-desert-800 transition hover:bg-white/45"
+                >
+                  {l.label}
+                </Link>
+              ))}
 
               <div className="mt-2 space-y-1.5 border-t border-white/40 pt-2.5">
                 {user ? (
                   <>
                     <Link
                       href="/dashboard"
-                      className="flex items-center justify-center gap-2 rounded-xl border border-white/60 bg-white/40 px-3 py-2 text-center text-sm font-semibold text-desert-800 backdrop-blur-xl"
+                      className="block rounded-xl border border-white/60 bg-white/40 px-3 py-2 text-center text-sm font-semibold text-desert-800 backdrop-blur-xl"
                     >
-                      <span className="text-base leading-none">🎒</span>
-                      <span>My Bookings</span>
+                      My Bookings
                     </Link>
                     <button
                       onClick={handleSignOut}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl px-3 py-2 text-center text-sm font-semibold text-white"
+                      className="block w-full rounded-xl px-3 py-2 text-center text-sm font-semibold text-white"
                       style={{
                         background: 'linear-gradient(135deg, #3d3229 0%, #1a1512 100%)',
                       }}
                     >
-                      <span className="text-base leading-none">🚪</span>
-                      <span>Sign out</span>
+                      Sign out
                     </button>
                   </>
                 ) : (
                   <>
                     <Link
                       href="/auth/sign-in"
-                      className="flex items-center justify-center gap-2 rounded-xl border border-white/60 bg-white/40 px-3 py-2 text-center text-sm font-semibold text-desert-800 backdrop-blur-xl"
+                      className="block rounded-xl border border-white/60 bg-white/40 px-3 py-2 text-center text-sm font-semibold text-desert-800 backdrop-blur-xl"
                     >
-                      <span className="text-base leading-none">🔑</span>
-                      <span>Sign in</span>
+                      Sign in
                     </Link>
                     <Link
                       href="/auth/sign-up"
-                      className="flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-center text-sm font-semibold text-white"
+                      className="block rounded-xl px-3 py-2 text-center text-sm font-semibold text-white"
                       style={{
                         background: 'linear-gradient(135deg, #db9c4d 0%, #a86527 100%)',
                       }}
                     >
-                      <span className="text-base leading-none">✨</span>
-                      <span>Create account</span>
+                      Create account
                     </Link>
                   </>
                 )}
