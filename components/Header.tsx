@@ -51,15 +51,13 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 px-2 pt-2 sm:px-4 sm:pt-4">
       <div
-        className="relative mx-auto max-w-7xl overflow-hidden rounded-xl border border-white/25 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.35)] backdrop-blur-3xl sm:rounded-2xl"
+        className="relative mx-auto max-w-7xl overflow-hidden rounded-xl border border-white/25 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.35)] sm:rounded-2xl"
         style={{
           background: 'rgba(255, 255, 255, 0.06)',
           backdropFilter: 'blur(40px) saturate(200%)',
           WebkitBackdropFilter: 'blur(40px) saturate(200%)',
         }}
       >
-        <span className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/25 to-transparent" />
-
         <div className="relative flex h-14 items-center justify-between px-3 sm:h-16 sm:px-6">
           <Logo />
 
@@ -91,7 +89,7 @@ export default function Header() {
               <>
                 <Link
                   href="/dashboard"
-                  className="rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/20"
+                  className="rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/20"
                   style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}
                 >
                   My Bookings
@@ -107,7 +105,7 @@ export default function Header() {
               <>
                 <Link
                   href="/auth/sign-in"
-                  className="rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/20"
+                  className="rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/20"
                   style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}
                 >
                   Sign in
@@ -124,7 +122,7 @@ export default function Header() {
 
           <button
             onClick={() => setOpen((v) => !v)}
-            className="rounded-full border border-white/30 bg-white/10 p-2 text-white backdrop-blur-md md:hidden"
+            className="rounded-full border border-white/30 bg-white/10 p-2 text-white md:hidden"
             aria-label="Toggle menu"
           >
             <svg
@@ -162,7 +160,7 @@ export default function Header() {
                   <>
                     <Link
                       href="/dashboard"
-                      className="block rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-center text-sm font-semibold text-white backdrop-blur-md"
+                      className="block rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-center text-sm font-semibold text-white"
                       style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}
                     >
                       My Bookings
@@ -178,7 +176,7 @@ export default function Header() {
                   <>
                     <Link
                       href="/auth/sign-in"
-                      className="block rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-center text-sm font-semibold text-white backdrop-blur-md"
+                      className="block rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-center text-sm font-semibold text-white"
                       style={{ textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}
                     >
                       Sign in
