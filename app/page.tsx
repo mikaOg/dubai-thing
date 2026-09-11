@@ -165,7 +165,7 @@ export default function HomePage() {
       </section>
 
       {/* STATS with animated gold dropdowns */}
-      <section className="px-3 pt-4 sm:px-4">
+      <section className="relative z-30 px-3 pt-4 sm:px-4">
         <div className="mx-auto max-w-7xl rounded-3xl border border-white/60 bg-white/55 px-5 py-6 shadow-[0_8px_40px_-15px_rgba(89,54,30,0.2)] backdrop-blur-2xl sm:px-10 sm:py-8">
           <div className="grid grid-cols-2 gap-5 sm:gap-6 md:grid-cols-4">
             {stats.map((s) => (
@@ -181,7 +181,7 @@ export default function HomePage() {
                 </p>
 
                 {/* Cool dropdown */}
-                <div className="pointer-events-none absolute left-1/2 top-full z-40 mt-4 w-72 -translate-x-1/2 translate-y-1 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 md:left-0 md:translate-x-0">
+                <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-4 w-72 -translate-x-1/2 translate-y-1 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 md:left-0 md:translate-x-0">
                   {/* Glow halo */}
                   <div className="absolute -inset-1 rounded-[20px] bg-gradient-to-br from-amber-300/40 via-sand-500/25 to-transparent opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -202,13 +202,10 @@ export default function HomePage() {
 
                     {/* List */}
                     <ul className="space-y-0.5 px-2.5 py-2.5">
-                      {s.list.map((item, i) => (
+                      {s.list.map((item) => (
                         <li
                           key={item}
                           className="group/item flex items-start gap-2.5 rounded-lg px-2 py-1.5 text-[12px] leading-snug text-desert-800 transition-colors duration-200 hover:bg-gradient-to-r hover:from-amber-50 hover:to-transparent"
-                          style={{
-                            transitionDelay: `${i * 30}ms`,
-                          }}
                         >
                           <span className="mt-[3px] flex h-1.5 w-1.5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-amber-600 shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
                           <span className="font-medium transition-colors duration-200 group-hover/item:text-desert-900">
