@@ -9,7 +9,7 @@ import { createClient } from '@/lib/supabase/client';
 import type { User } from '@supabase/supabase-js';
 
 const links = [
-  { href: '/', label: 'Home', icon: null },
+  { href: '/', label: 'Home', icon: null as string | null },
   { href: '/tours', label: 'Tours', icon: '/tours.png' },
   { href: '/about', label: 'About', icon: '/about.png' },
   { href: '/contact', label: 'Contact', icon: '/contact.png' },
@@ -57,7 +57,6 @@ export default function Header() {
         <div className="relative flex h-14 items-center justify-between px-3 sm:h-16 sm:px-6">
           <Logo />
 
-          {/* Desktop nav */}
           <nav className="hidden items-center gap-1 md:flex">
             {links.map((l) => {
               const active =
@@ -160,7 +159,6 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile menu */}
         {open && (
           <div className="relative border-t border-white/40 md:hidden">
             <div className="space-y-0.5 px-2.5 py-2.5">
