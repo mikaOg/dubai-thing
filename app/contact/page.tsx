@@ -20,13 +20,16 @@ export default function ContactPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           full_name: fullName,
-          email,
-          message,
+          email: email,
+          message: message,
         }),
       });
 
       if (!res.ok) {
-        throw new Error('Failed to send');
+        const data = await res.json().catch(function () {
+          return {};
+        });
+        throw new Error(data.error || 'Failed to send');
       }
 
       setStatus('sent');
@@ -34,7 +37,9 @@ export default function ContactPage() {
       setEmail('');
       setMessage('');
     } catch (err) {
-      setError('Something went wrong. Please try again or email us directly.');
+      const msg =
+        err instanceof Error ? err.message : 'Something went wrong. Please try again.';
+      setError(msg);
       setStatus('error');
     }
   };
@@ -53,17 +58,28 @@ export default function ContactPage() {
       <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-2">
           <div className="space-y-6">
-            {[
-              { t: 'Office', v: 'Hawelti Sub-city, Mekelle, Tigray, Ethiopia' },
-              { t: 'Email', v: 'thomasn4jackson08@gmail.com' },
-              { t: 'Phone / WhatsApp', v: '+251 900 000 000' },
-              { t: 'Hours', v: 'Monday – Saturday, 08:00 – 19:00 EAT' },
-            ].map((c) => (
-              <div key={c.t} className="rounded-2xl border border-sand-200 bg-sand-50/60 p-5">
-                <p className="text-xs font-bold uppercase tracking-wider text-sand-600">{c.t}</p>
-                <p className="mt-1 text-sm text-desert-800">{c.v}</p>
-              </div>
-            ))}
+            <div className="rounded-2xl border border-sand-200 bg-sand-50/60 p-5">
+              <p className="text-xs font-bold uppercase tracking-wider text-sand-600">Office</p>
+              <p className="mt-1 text-sm text-desert-800">
+                Hawelti Sub-city, Mekelle, Tigray, Ethiopia
+              </p>
+            </div>
+            <div className="rounded-2xl border border-sand-200 bg-sand-50/60 p-5">
+              <p className="text-xs font-bold uppercase tracking-wider text-sand-600">Email</p>
+              <p className="mt-1 text-sm text-desert-800">thomasn4jackson08@gmail.com</p>
+            </div>
+            <div className="rounded-2xl border border-sand-200 bg-sand-50/60 p-5">
+              <p className="text-xs font-bold uppercase tracking-wider text-sand-600">
+                Phone / WhatsApp
+              </p>
+              <p className="mt-1 text-sm text-desert-800">+251 900 000 000</p>
+            </div>
+            <div className="rounded-2xl border border-sand-200 bg-sand-50/60 p-5">
+              <p className="text-xs font-bold uppercase tracking-wider text-sand-600">Hours</p>
+              <p className="mt-1 text-sm text-desert-800">
+                Monday – Saturday, 08:00 – 19:00 EAT
+              </p>
+            </div>
           </div>
 
           {status === 'sent' ? (
@@ -74,7 +90,9 @@ export default function ContactPage() {
                 Thanks for reaching out. We&apos;ll get back to you within a few hours.
               </p>
               <button
-                onClick={() => setStatus('idle')}
+                onClick={function () {
+                  setStatus('idle');
+                }}
                 className="mt-6 rounded-full bg-green-700 px-6 py-2 text-sm font-bold text-white hover:bg-green-800"
               >
                 Send another
@@ -94,7 +112,9 @@ export default function ContactPage() {
                 <input
                   required
                   value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
+                  onChange={function (e) {
+                    setFullName(e.target.value);
+                  }}
                   className="mt-1 w-full rounded-lg border border-sand-300 px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
                 />
               </div>
@@ -105,7 +125,9 @@ export default function ContactPage() {
                   type="email"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={function (e) {
+                    setEmail(e.target.value);
+                  }}
                   className="mt-1 w-full rounded-lg border border-sand-300 px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
                 />
               </div>
@@ -116,7 +138,9 @@ export default function ContactPage() {
                   rows={5}
                   required
                   value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                  onChange={function (e) {
+                    setMessage(e.target.value);
+                  }}
                   className="mt-1 w-full resize-none rounded-lg border border-sand-300 px-3 py-2.5 text-sm outline-none focus:border-sand-500 focus:ring-2 focus:ring-sand-200"
                 />
               </div>
