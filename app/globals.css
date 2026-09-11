@@ -12,8 +12,7 @@ body {
   min-height: 100vh;
 }
 
-/* Fixed background image — sharp on all screens because it only
-   needs to cover the viewport, not the full page height */
+/* Desktop / tablet background photo */
 body::after {
   content: '';
   position: fixed;
@@ -26,7 +25,7 @@ body::after {
   pointer-events: none;
 }
 
-/* Dark overlay for text contrast */
+/* Overlay for text contrast */
 body::before {
   content: '';
   position: fixed;
@@ -255,10 +254,24 @@ body::before {
 }
 
 /* ============================================================
-   MOBILE OVERRIDES — light, compact, fast
+   MOBILE OVERRIDES — Option 2: solid gradient background
+   Desktop completely unchanged.
    ============================================================ */
 @media (max-width: 767px) {
-  /* 1. Kill blur for smooth rendering */
+  /* 1. NO background photo on mobile — clean desert gradient */
+  body::after {
+    background-image: none !important;
+    background: none !important;
+  }
+
+  body::before {
+    background:
+      radial-gradient(800px 500px at 15% 0%, rgba(201, 130, 50, 0.35) 0%, transparent 60%),
+      radial-gradient(700px 500px at 90% 100%, rgba(60, 44, 32, 1) 0%, transparent 60%),
+      linear-gradient(180deg, #2a221c 0%, #1f1916 100%) !important;
+  }
+
+  /* 2. Kill blur for smooth rendering */
   *,
   *::before,
   *::after {
@@ -266,22 +279,12 @@ body::before {
     -webkit-backdrop-filter: none !important;
   }
 
-  /* 2. Shrink everything slightly (~12.5%) for comfort */
+  /* 3. Slight scale down for comfort */
   html {
     font-size: 14px;
   }
 
-  /* 3. Lighter overlay on mobile so the photo shows through */
-  body::before {
-    background: linear-gradient(
-      180deg,
-      rgba(26, 21, 18, 0.42) 0%,
-      rgba(26, 21, 18, 0.32) 40%,
-      rgba(26, 21, 18, 0.48) 100%
-    );
-  }
-
-  /* 4. Glass → clean solid LIGHT cards */
+  /* 4. Glass → clean light solid cards */
   .glass,
   .glass-strong {
     background: rgba(255, 255, 255, 0.94) !important;
@@ -310,7 +313,7 @@ body::before {
     box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.2) !important;
   }
 
-  /* 6. Inputs — solid white, sharp text, no iOS zoom */
+  /* 6. Inputs — solid white, no iOS zoom */
   .glass-input {
     background: #ffffff !important;
     color: #1a1512 !important;
@@ -346,7 +349,7 @@ body::before {
     font-size: 0.6rem !important;
   }
 
-  /* 9. Tour cards — dark, compact, animated */
+  /* 9. Tour cards — dark, compact, still animated */
   .marquee-track article {
     background-color: rgba(22, 18, 15, 0.92) !important;
     border-color: rgba(255, 255, 255, 0.15) !important;
